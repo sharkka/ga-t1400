@@ -22,19 +22,19 @@ public:
     int    sys_unregister(const char* ip, int port, const char* deviceId);
     int    sys_keepalive(const char* ip, int port, const char* deviceId);
     int    sys_synctime(const char* ip, int port);
-    int    query_apes(const char* key, const char* value);
-    int    update_apes();
-    int    query_apss();
-    int    query_tollgates();
-    int    query_lanes();
-    int    query_video_slices();
-    int    add_video_slices();
-    int    query_video_slice();
-    int    update_video_slice();
-    int    delete_video_slice();
-    int    query_videoinfo();
-    int    add_videoinfo();
-    int    delete_videoinfo();
+    int    query_apes(const char* ip, int port, const char* key, const char* value);
+    int    update_apes(const char* ip, int port);
+    int    query_apss(const char* ip, int port, const char* key, const char* value);
+    int    query_tollgates(const char* ip, int port, const char* key, const char* value);
+    int    query_lanes(const char* ip, int port, const char* key, const char* value);
+    int    query_video_slices(const char* ip, int port, const char* key, const char* value);
+    int    add_video_slices(const char* ip, int port, const char* id, const char* deviceId);
+    int    query_video_slice(const char* ip, int port, const char* id);
+    int    update_video_slice(const char* ip, int port, const char* id, const char* deviceId);
+    int    delete_video_slice(const char* ip, int port, const char* id);
+    int    query_videodata();
+    int    add_videodata();
+    int    delete_videodata();
     int    query_images();
     int    add_images();
     int    query_image();
@@ -135,7 +135,9 @@ public:
     int    delete_video_label();
     
 private:
-    const char* port2String(int port) {char buff[8]={0}; sprintf(buff, "%d", port); return buff;}
+    const char* num2String(int port) {static char buff[32]={0}; sprintf(buff, "%d", port); return buff;}
+    std::string queryCondition(const char* key, const char* value);
+
     std::string addressPrefix(const char* ip, int port);
     std::string makeRegisterMessage(const char* deviceId);
     std::string makeUnregisterMessage(const char* deviceId);

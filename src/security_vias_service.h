@@ -54,7 +54,7 @@ public:
     
 
 private:
-    const char* port2String(int port) {char buff[8]={0}; sprintf(buff, "%d", port); return buff;}
+    const char* port2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}
     std::string makeRegisterMessage(const char* deviceId);
 };
 
