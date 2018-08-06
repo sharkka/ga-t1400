@@ -32,29 +32,36 @@ public:
     int    query_video_slice(const char* ip, int port, const char* id);
     int    update_video_slice(const char* ip, int port, const char* id, const char* deviceId);
     int    delete_video_slice(const char* ip, int port, const char* id);
-    int    query_videodata();
-    int    add_videodata();
-    int    delete_videodata();
-    int    query_images();
-    int    add_images();
-    int    query_image();
-    int    add_image();
-    int    query_imageinfo();
-    int    add_imageinfo();
-    int    delete_imageinfo();
-    int    query_imagedata();
-    int    add_imagedata();
-    int    delete_imagedata();
-    int    query_files();
-    int    add_files();
-    int    query_file();
-    int    add_file();
-    int    query_fileinfo();
-    int    add_fileinfo();
-    int    delete_fileinfo();
+    int    query_videodata(const char* ip, int port, const char* id);
+    int    add_videodata(const char* ip, int port, const char* id, const char* buff);
+    int    delete_videodata(const char* ip, int port, const char* id);
+
+    int    query_images(const char* ip, int port, const char* key, const char* value);
+    int    add_images(const char* ip, int port, const char* id, const char* buff);
+    int    query_image(const char* ip, int port, const char* id);
+    int    update_image(const char* ip, int port, const char* id);
+    int    delete_image(const char* ip, int port, const char* id);
+    int    query_imageinfo(const char* ip, int port, const char* id);
+    int    update_imageinfo(const char* ip, int port, const char* id, const security_image_info_t* info);
+    int    delete_imageinfo(const char* ip, int port, const char* id);
+    int    query_imagedata(const char* ip, int port, const char* id);
+    int    add_imagedata(const char* ip, int port, const char* id, const char* buff);
+    int    delete_imagedata(const char* ip, int port, const char* id);
+    int    query_files(const char* ip, int port, const char* key, const char* value);
+    int    update_files(const char* ip, int port, const security_image_object_t* imgObj);
+
+    int    query_file(const char* ip, int port, const char* id);
+    int    update_file(const char* ip, int port, const char* id, const char* security_file_object_t* fileObj);
+    int    delete_file(const char* ip, int port, const char* id);
+
+    int    query_fileinfo(const char* ip, int port, const char* id);
+    int    update_fileinfo(const char* ip, int port, const char* id);
+    int    delete_fileinfo(const char* ip, int port, const char* id);
+
     int    query_filedata();
     int    add_filedata();
     int    delete_filedata();
+
     int    query_persons();
     int    add_persons();
     int    delete_persons();
