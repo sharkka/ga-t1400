@@ -302,10 +302,56 @@ std::string security_message_factory::makeFileInfoMessage(const security_file_in
     printf("%s\n", sxml.c_str());
     return sxml;
 }
+/**
+ * @Method   makePersonListMessage
+ * @Brief
+ * @DateTime 2018-08-06T17:08:03+0800
+ * @Modify   2018-08-06T17:08:03+0800
+ * @Author   Anyz
+ * @param    personList [description]
+ * @return   [description]
+ */
+std::string security_message_factory::makePersonListMessage(std::vector<security_person_object_t>& personList) {
+    simple_xml sx;
+    sx.createRoot("complexType", "name", "PersonList");
+    XMLNodeHandle node = sx.createNode("sequence");
+    XMLNodeHandle node1 = sx.createChild(node, "element");
+    sx.addProperity(node1, "name", "PersonObject");
+    sx.addProperity(node1, "type", "Person");
+    sx.addProperity(node1, "minOccurs", "0");
+
+    std::string sxml = sx.buildDoc(node);
+    printf("%s\n", sxml.c_str());
+    return sxml;
+}
+/**
+ * @Method   makePersonObjMessage
+ * @Brief
+ * @DateTime 2018-08-06T17:08:17+0800
+ * @Modify   2018-08-06T17:08:17+0800
+ * @Author   Anyz
+ * @param    personList [description]
+ * @return   [description]
+ */
+std::string security_message_factory::makePersonObjMessage(security_person_object_t* personObj) {
+    simple_xml sx;
+    sx.createRoot("complexType", "name", "Person");
+    XMLNodeHandle node = sx.createNode("sequence");
+    XMLNodeHandle node1 = sx.createChild(node, "element");
+    sx.addProperity(node1, "name", "PersonID");
+    sx.addProperity(node1, "type", "ImageCntObjectIdType");
+
+    XMLNodeHandle node2 = sx.createChild(node, "element");
+    sx.addProperity(node2, "name", "InfoKind");
+    sx.addProperity(node2, "type", "InfoType");
+    sx.addProperity(node2, "use", "required");
+    // ...
 
 
-
-
+    std::string sxml = sx.buildDoc(node);
+    printf("%s\n", sxml.c_str());
+    return sxml;
+}
 
 
 

@@ -97,6 +97,16 @@ typedef struct _security_file_info {
     int         fileSize;
 } security_file_info_t;
 
+typedef struct _security_person_object {
+    
+} security_person_object_t;
+
+
+
+
+
+
+
 
 
 /**
@@ -120,6 +130,8 @@ public:
     static std::string makeFileListMessage(const security_file_object_t* fo);
     static std::string makeFileObjectMessage(const security_file_object_t* fo);
     static std::string makeFileInfoMessage(const security_file_object_t* fo);
+    static std::string makePersonListMessage();
+    static std::string makePersonObjectMessage();
 
 private:
     const char* port2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}

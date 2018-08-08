@@ -58,21 +58,25 @@ public:
     int    update_fileinfo(const char* ip, int port, const char* id);
     int    delete_fileinfo(const char* ip, int port, const char* id);
 
-    int    query_filedata();
-    int    add_filedata();
-    int    delete_filedata();
+    int    query_filedata(const char* ip, int port, const char* id);
+    int    add_filedata(const char* ip, int port, const char* id, const char* buff);
+    int    delete_filedata(const char* ip, int port, const char* id);
 
-    int    query_persons();
-    int    add_persons();
-    int    delete_persons();
-    int    query_person();
-    int    add_person();
-    int    delete_person();
-    int    query_faces();
+    int    query_persons(const char* ip, int port, const char* key, const char* value);
+    int    add_persons(const char* ip, int port, std::vector<security_person_object_t>& personList);
+    int    update_persons(const char* ip, int port, std::vector<security_person_object_t>& personList);
+    int    delete_persons(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    query_person(const char* ip, int port, const char* id);
+    int    update_person(const char* ip, int port, const char* id, const security_person_object_t* personObj);
+    int    delete_person(const char* ip, int port, const char* id);
+
+    int    query_faces(const char* ip, int port, const char* id);
     int    add_faces();
     int    delete_faces();
     int    query_face();
     int    add_face();
+    
     int    delete_face();
     int    query_vehicles();
     int    add_vehicles();
