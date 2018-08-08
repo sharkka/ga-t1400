@@ -80,7 +80,13 @@ typedef struct _security_file_object {
     std::string entryTime;
     int         fileSize;
 } security_file_object_t;
-
+/**
+ * @Struct   security_file_info_t
+ * @Brief
+ * @DateTime 2018-08-01T10:52:46+0800
+ * @Modify   2018-08-01T10:52:46+0800
+ * @Author   Anyz
+ */
 typedef struct _security_file_info {
     std::string fileId;
     std::string infoKind;
@@ -96,11 +102,58 @@ typedef struct _security_file_info {
     std::string entryTime;
     int         fileSize;
 } security_file_info_t;
-
+/**
+ * @Struct   security_person_object_t
+ * @Brief
+ * @DateTime 2018-08-01T10:52:46+0800
+ * @Modify   2018-08-01T10:52:46+0800
+ * @Author   Anyz
+ */
 typedef struct _security_person_object {
     
 } security_person_object_t;
+/**
+ * @Struct   security_face_object_t
+ * @Brief
+ * @DateTime 2018-08-01T10:52:46+0800
+ * @Modify   2018-08-01T10:52:46+0800
+ * @Author   Anyz
+ */
+typedef struct _security_face_object {
 
+} security_face_object_t;
+
+typedef struct _security_motorvehicle_object {
+
+} security_motorvehicle_object_t;
+
+typedef struct _security_nonmotorvehicle_object {
+
+} security_nonmotorvehicle_object_t;
+
+typedef struct _security_thing_object {
+
+} security_thing_object_t;
+
+typedef struct _security_scene_object {
+
+} security_scene_object_t;
+
+typedef struct _security_case_object {
+
+} security_case_object_t;
+
+typedef struct _security_caseinfo_t {
+
+} security_caseinfo_t;
+
+typedef struct _security_disposition_t {
+
+} security_disposition_t;
+
+typedef struct _security_analysis_rule_t {
+
+} security_analysis_rule_t;
 
 
 
@@ -132,6 +185,7 @@ public:
     static std::string makeFileInfoMessage(const security_file_object_t* fo);
     static std::string makePersonListMessage();
     static std::string makePersonObjectMessage();
+    static std::string makeFaceListMessage();
 
 private:
     const char* port2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}

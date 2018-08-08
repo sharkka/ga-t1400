@@ -1704,303 +1704,2651 @@ int security_viid::delete_person(const char* ip, int port, const char* id) {
     // parse ResponseStatus
     return 0;
 }
-
-int security_viid::query_faces(const char* ip, int port, const char* id) {
-    
-}
-
-int security_viid::add_faces() {
-    
-}
-
-int security_viid::delete_faces() {
-    
-}
-
-int security_viid::query_face() {
-    
-}
-
-int security_viid::add_face() {
-    
-}
-
-int security_viid::delete_face() {
-    
-}
-
-int security_viid::query_vehicles() {
-    
-}
-
-int security_viid::add_vehicles() {
-    
-}
-
-int security_viid::delete_vehicles() {
-    
-}
-
-int security_viid::query_vehicle() {
-    
-}
-
-int security_viid::add_vehicle() {
-    
-}
-
-int security_viid::delete_vehicles() {
-    
-}
-
-int security_viid::query_novehicles() {
-    
-}
-
-int security_viid::add_nonvehicles() {
-    
-}
-
-int security_viid::delete_nonvehicles() {
-    
-}
-
-int security_viid::query_nonvehicle() {
-    
-}
-
-int security_viid::add_nonvehicle() {
-    
-}
-
-int security_viid::delete_nonvehicle() {
-    
-}
-
-int security_viid::query_things() {
-    
-}
-
-int security_viid::add_things() {
-    
-}
-
-int security_viid::delete_things() {
-    
-}
-
-int security_viid::query_thing() {
-    
-}
-
-int security_viid::insert_thing() {
-    
-}
-
-int security_viid::delete_thing() {
-    
-}
-
-int security_viid::query_scenes() {
-    
-}
-
-int security_viid::add_scenes() {
-    
-}
-
-int security_viid::delete_scenes() {
-    
-}
-
-int security_viid::query_scene() {
-    
-}
-
-int security_viid::add_scene() {
-    
-}
-
-int security_viid::delete_scene() {
-    
-}
-
-int security_viid::query_cases() {
-    
-}
-
-int security_viid::add_cases() {
-    
-}
-
-int security_viid::delete_cases() {
-    
-}
-
-int security_viid::query_case() {
-    
-}
-
-int security_viid::add_case() {
-    
-}
-
-int security_viid::delete_case() {
-    
-}
-
-int security_viid::query_caseinfo() {
-    
-}
-
-int security_viid::add_caseinfo() {
-    
-}
-
-int security_viid::delete_caseinfo() {
-    
-}
-
-int security_viid::dispositions() {
-    
-}
-
-int security_viid::query_disposition() {
-    
-}
-
-int security_viid::update_disposition() {
-    
-}
-
-int security_viid::delete_disposition() {
-    
-}
-
-int security_viid::undispostions() {
-    
-}
-
-int security_viid::disposition_notifications() {
-    
-}
-
-int security_viid::query_disposition_notification() {
-    
-}
-
-int security_viid::delete_disposition_notification() {
-    
-}
-
-int security_viid::subscribes() {
-    
-}
-
-int security_viid::query_subscribes() {
-    
-}
-
-int security_viid::update_subscribes() {
-    
-}
-
-int security_viid::delete_subscribes() {
-    
-}
-
-int security_viid::unsubscribes() {
-    
-}
-
-int security_viid::subscribe_notifications() {
-    
-}
-
-int security_viid::query_subscribe_notifications() {
-    
-}
-
-int security_viid::update_subscribe_notifications() {
-    
-}
-
-int security_viid::delete_subscribe_notifications() {
-    
-}
-
-int security_viid::query_analysis_rules() {
-    
-}
-
-int security_viid::add_analysis_rules() {
-    
-}
-
-int security_viid::update_analysis_rules() {
-    
-}
-
-int security_viid::delete_analysis_rules() {
-    
-}
-
-int security_viid::query_analysis_rule() {
-    
-}
-
-int security_viid::add_analysis_rule() {
-    
-}
-
-int security_viid::update_analysis_rule() {
-    
-}
-
-int security_viid::delete_analysis_rule() {
-    
-}
-
-int security_viid::query_video_labels() {
-    
-}
-
-int security_viid::add_video_labels() {
-    
-}
-
-int security_viid::update_video_labels() {
-    
+/**
+ * @Method   query_faces
+ * @Brief
+ * @DateTime 2018-08-08T10:46:44+0800
+ * @Modify   2018-08-08T10:46:44+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_faces(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get face list failed.\n");
+        return -1;
+    }
+    printf("get face list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase FaceList
+    return 0;
+}
+/**
+ * @Method   update_faces
+ * @Brief
+ * @DateTime 2018-08-08T10:47:39+0800
+ * @Modify   2018-08-08T10:47:39+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @return   [description]
+ */
+int security_viid::update_faces(const char* ip, int port, std::vector<security_face_object_t>& faceList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACES);
+    std::string sxml = security_message_factory::makeFaceListMessage(faceObj);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update face list failed.\n");
+        return -1;
+    }
+    printf("update face list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase ResponseStatusList
+    return 0;
+}
+/**
+ * @Method   delete_faces
+ * @Brief
+ * @DateTime 2018-08-08T10:49:53+0800
+ * @Modify   2018-08-08T10:49:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_faces(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACES);
+    std::string condi;
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete face list failed.\n");
+        return -1;
+    }
+    printf("delete face list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase ResponseStatusList
+    return 0;
+}
+/**
+ * @Method   query_face
+ * @Brief
+ * @DateTime 2018-08-08T10:54:51+0800
+ * @Modify   2018-08-08T10:54:51+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_face(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get face failed.\n");
+        return -1;
+    }
+    printf("get face success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Face Object
+    return 0;
+}
+/**
+ * @Method   update_face
+ * @Brief
+ * @DateTime 2018-08-08T10:57:35+0800
+ * @Modify   2018-08-08T10:57:35+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    faceObj [description]
+ * @return   [description]
+ */
+int security_viid::update_face(const char* ip, int port, const security_face_object_t* faceObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeFaceObjectMessage(faceObj);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update face failed.\n");
+        return -1;
+    }
+    printf("update face success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseList
+    return 0;
+}
+/**
+ * @Method   delete_face
+ * @Brief
+ * @DateTime 2018-08-08T11:01:15+0800
+ * @Modify   2018-08-08T11:01:15+0800
+ * @Author   Anyz
+ * @return   [description]
+ */
+int security_viid::delete_face(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_FACESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.del(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete face failed.\n");
+        return -1;
+    }
+    printf("delete face success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_motorvehiclies
+ * @Brief
+ * @DateTime 2018-08-08T11:09:18+0800
+ * @Modify   2018-08-08T11:09:18+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_motorvehicles(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHIS);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get motorvehicle list failed.\n");
+        return -1;
+    }
+    printf("get motorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase MotorVehicle list
+    return 0;
+}
+/**
+ * @Method   add_motorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:12:26+0800
+ * @Modify   2018-08-08T11:12:26+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    faceList [description]
+ * @return   [description]
+ */
+int security_viid::add_motorvehicles(const char* ip, int port, std::vector<security_vehicle_object_t>& vehicleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHIS);
+    std::string sxml = security_message_factory::makeMotorVehicleListMessage(vehicleList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add motorvehicle list failed.\n");
+        return -1;
+    }
+    printf("add motorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   update_motorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:13:01+0800
+ * @Modify   2018-08-08T11:13:01+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    faceList [description]
+ * @return   [description]
+ */
+int security_viid::update_motorvehicles(const char* ip, int port, std::vector<security_vehicle_object_t>& vehicleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHIS);
+    std::string sxml = security_message_factory::makeMotorVehicleListMessage(vehicleList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update motorvehicle list failed.\n");
+        return -1;
+    }
+    printf("update motorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   delete_motorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:16:50+0800
+ * @Modify   2018-08-08T11:16:50+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_motorvehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHIS);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete motorvehicle list failed.\n");
+        return -1;
+    }
+    printf("delete motorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   query_motorvehicle
+ * @Brief
+ * @DateTime 2018-08-08T11:20:54+0800
+ * @Modify   2018-08-08T11:20:54+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_motorvehicle(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get motor vechicle failed.\n");
+        return -1;
+    }
+    printf("get motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse MotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   add_motorvehicle
+ * @Brief
+ * @DateTime 2018-08-08T11:23:40+0800
+ * @Modify   2018-08-08T11:23:40+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    vehicleObj [description]
+ * @return   [description]
+ */
+int security_viid::add_motorvehicle(const char* ip, int port, const security_motorvehicle_object_t* vehicleObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeMotorVehicleMessage(vehicleObj);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add motor vehicle failed.\n");
+        return -1;
+    }
+    printf("add motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse MotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   delete_motorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:29:11+0800
+ * @Modify   2018-08-08T11:29:11+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_motorvehicle(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_MOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete motor vehicle failed.\n");
+        return -1;
+    }
+    printf("delete motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse MotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   query_nonmotorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:33:17+0800
+ * @Modify   2018-08-08T11:33:17+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_nonmotorvehicles(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get nonmotorvehicle list failed.\n");
+        return -1;
+    }
+    printf("get nonmotorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase NonMotorVehicle list
+    return 0;
+}
+/**
+ * @Method   add_nonmotorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:35:11+0800
+ * @Modify   2018-08-08T11:35:11+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    nvehicleList [description]
+ * @return   [description]
+ */
+int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
+    std::string sxml = security_message_factory::makeMotorVehicleListMessage(nvehiclieList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add nonmotorvehicle list failed.\n");
+        return -1;
+    }
+    printf("add nonmotorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   update_nonmotorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:36:30+0800
+ * @Modify   2018-08-08T11:36:30+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    nvehicleList [description]
+ * @return   [description]
+ */
+int security_viid::update_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
+    std::string sxml = security_message_factory::makeMotorVehicleListMessage(nonvehicleList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update nonmotorvehicle list failed.\n");
+        return -1;
+    }
+    printf("update nonmotorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   delete_nonmotorvehicles
+ * @Brief
+ * @DateTime 2018-08-08T11:37:04+0800
+ * @Modify   2018-08-08T11:37:04+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_nonmotorvehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete nonmotorvehicle list failed.\n");
+        return -1;
+    }
+    printf("delete nonmotorvehicle list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   query_nonmotorvehicle
+ * @Brief
+ * @DateTime 2018-08-08T11:37:45+0800
+ * @Modify   2018-08-08T11:37:45+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_nonmotorvehicle(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get non motor vehicle failed.\n");
+        return -1;
+    }
+    printf("get non motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse MotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   add_nonmotorvehicle
+ * @Brief
+ * @DateTime 2018-08-08T11:39:23+0800
+ * @Modify   2018-08-08T11:39:23+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    nvehicleObj [description]
+ * @return   [description]
+ */
+int security_viid::add_nonmotorvehicle(const char* ip, int port, const security_nonmotorvehicle_object_t* nvehicleObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeNonMotorVehicleMessage(nvehicleObj);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add non motor vehicle failed.\n");
+        return -1;
+    }
+    printf("add non motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse NonMotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   delete_nonmotorvehicle
+ * @Brief
+ * @DateTime 2018-08-08T11:39:56+0800
+ * @Modify   2018-08-08T11:39:56+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_nonmotorvehicle(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHISS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete non motor vehicle failed.\n");
+        return -1;
+    }
+    printf("delete non motor vehicle success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse NonMotorVehicle Object
+    return 0;
+}
+/**
+ * @Method   query_things
+ * @Brief
+ * @DateTime 2018-08-08T11:48:46+0800
+ * @Modify   2018-08-08T11:48:46+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_things(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGS);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get thing list failed.\n");
+        return -1;
+    }
+    printf("get ting list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   add_things
+ * @Brief
+ * @DateTime 2018-08-08T11:49:26+0800
+ * @Modify   2018-08-08T11:49:26+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    thingList [description]
+ * @return   [description]
+ */
+int security_viid::add_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGS);
+    std::string sxml = security_message_factory::makeThingListMessage(thingList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add thing list failed.\n");
+        return -1;
+    }
+    printf("add thing list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   update_things
+ * @Brief
+ * @DateTime 2018-08-08T11:50:23+0800
+ * @Modify   2018-08-08T11:50:23+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    thingList [description]
+ * @return   [description]
+ */
+int security_viid::update_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGS);
+    std::string sxml = security_message_factory::makeThingListMessage(thingList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update thing list failed.\n");
+        return -1;
+    }
+    printf("update thing list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   delete_things
+ * @Brief
+ * @DateTime 2018-08-08T11:50:51+0800
+ * @Modify   2018-08-08T11:50:51+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_things(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGS);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete thing list failed.\n");
+        return -1;
+    }
+    printf("delete thing list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   query_thing
+ * @Brief
+ * @DateTime 2018-08-08T11:51:28+0800
+ * @Modify   2018-08-08T11:51:28+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_thing(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get thing failed.\n");
+        return -1;
+    }
+    printf("get thing success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Thing Object
+    return 0;
+}
+/**
+ * @Method   add_thing
+ * @Brief
+ * @DateTime 2018-08-08T11:52:14+0800
+ * @Modify   2018-08-08T11:52:14+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    thingObj [description]
+ * @return   [description]
+ */
+int security_viid::add_thing(const char* ip, int port, const security_thing_object_t* thingObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeThingMessage(thingObj);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add thing failed.\n");
+        return -1;
+    }
+    printf("add thing success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Thing Object
+    return 0;
+}
+/**
+ * @Method   delete_thing
+ * @Brief
+ * @DateTime 2018-08-08T11:53:32+0800
+ * @Modify   2018-08-08T11:53:32+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_thing(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_THINGSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete thing failed.\n");
+        return -1;
+    }
+    printf("delete thing success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Thing Object
+    return 0;
+}
+/**
+ * @Method   query_scenes
+ * @Brief
+ * @DateTime 2018-08-08T11:59:22+0800
+ * @Modify   2018-08-08T11:59:22+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_scenes(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get scene list failed.\n");
+        return -1;
+    }
+    printf("get scene list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   add_scenes
+ * @Brief
+ * @DateTime 2018-08-08T12:00:09+0800
+ * @Modify   2018-08-08T12:00:09+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    sceneList [description]
+ * @return   [description]
+ */
+int security_viid::add_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENES);
+    std::string sxml = security_message_factory::makeSceneListMessage(sceneList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add scene list failed.\n");
+        return -1;
+    }
+    printf("add scene list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   update_scene
+ * @Brief
+ * @DateTime 2018-08-08T12:01:57+0800
+ * @Modify   2018-08-08T12:01:57+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    sceneList [description]
+ * @return   [description]
+ */
+int security_viid::update_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENES);
+    std::string sxml = security_message_factory::makeSceneListMessage(sceneList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update scene list failed.\n");
+        return -1;
+    }
+    printf("update scene list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   delete_scenes
+ * @Brief
+ * @DateTime 2018-08-08T12:03:05+0800
+ * @Modify   2018-08-08T12:03:05+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_scenes(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENES);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete scene list failed.\n");
+        return -1;
+    }
+    printf("delete scene list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   query_scene
+ * @Brief
+ * @DateTime 2018-08-08T12:04:03+0800
+ * @Modify   2018-08-08T12:04:03+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_scene(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get scene failed.\n");
+        return -1;
+    }
+    printf("get scene success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Scene Object
+    return 0;
+}
+/**
+ * @Method   add_scene
+ * @Brief
+ * @DateTime 2018-08-08T12:05:08+0800
+ * @Modify   2018-08-08T12:05:08+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    sceneObj [description]
+ * @return   [description]
+ */
+int security_viid::add_scene(const char* ip, int port, const security_scene_object_t* sceneObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeSceneMessage(sceneObj);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add scene failed.\n");
+        return -1;
+    }
+    printf("add scene success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Scene Object
+    return 0;
+}
+/**
+ * @Method   delete_scene
+ * @Brief
+ * @DateTime 2018-08-08T12:05:20+0800
+ * @Modify   2018-08-08T12:05:20+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_scene(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SCENESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete scene failed.\n");
+        return -1;
+    }
+    printf("delete scene success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Scene Object
+    return 0;
+}
+/**
+ * @Method   query_cases
+ * @Brief
+ * @DateTime 2018-08-08T12:10:07+0800
+ * @Modify   2018-08-08T12:10:07+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_cases(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get case list failed.\n");
+        return -1;
+    }
+    printf("get case list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   add_cases
+ * @Brief
+ * @DateTime 2018-08-08T12:00:09+0800
+ * @Modify   2018-08-08T12:00:09+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    sceneList [description]
+ * @return   [description]
+ */
+int security_viid::add_cases(const char* ip, int port, std::vector<security_case_object_t>& caseList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASES);
+    std::string sxml = security_message_factory::makeCaseListMessage(caseList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add case list failed.\n");
+        return -1;
+    }
+    printf("add case list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase 
+    return 0;
+}
+/**
+ * @Method   query_case
+ * @Brief
+ * @DateTime 2018-08-08T12:04:03+0800
+ * @Modify   2018-08-08T12:04:03+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_case(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get case failed.\n");
+        return -1;
+    }
+    printf("get case success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Case Object
+    return 0;
+}
+/**
+ * @Method   add_case
+ * @Brief
+ * @DateTime 2018-08-08T12:05:08+0800
+ * @Modify   2018-08-08T12:05:08+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    sceneObj [description]
+ * @return   [description]
+ */
+int security_viid::add_case(const char* ip, int port, const security_case_object_t* caseObj) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeCaseMessage(caseObj);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add case failed.\n");
+        return -1;
+    }
+    printf("add case success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Case Object
+    return 0;
+}
+/**
+ * @Method   delete_case
+ * @Brief
+ * @DateTime 2018-08-08T12:05:20+0800
+ * @Modify   2018-08-08T12:05:20+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_case(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete case failed.\n");
+        return -1;
+    }
+    printf("delete case success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse Case Object
+    return 0;
+}
+/**
+ * @Method   query_caseinfo
+ * @Brief
+ * @DateTime 2018-08-08T13:34:41+0800
+ * @Modify   2018-08-08T13:34:41+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_caseinfo(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    suri.append(SECURITY_URL_PATH_S_INFO);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get case info failed.\n");
+        return -1;
+    }
+    printf("get case info success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse FileInfo
+    return 0;
+}
+/**
+ * @Method   update_caseinfo
+ * @Brief
+ * @DateTime 2018-08-08T13:34:51+0800
+ * @Modify   2018-08-08T13:34:51+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @param    caseInfo [description]
+ * @return   [description]
+ */
+int security_viid::update_caseinfo(const char* ip, int port, const char* id, const security_case_info_t* caseInfo) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    suri.append(SECURITY_URL_PATH_S_INFO);
+    std::string sxml = security_message_factory::makeCaseInfoMessage(caseInfo);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update case info failed.\n");
+        return -1;
+    }
+    printf("update case info success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   delete_caseinfo
+ * @Brief
+ * @DateTime 2018-08-08T13:35:02+0800
+ * @Modify   2018-08-08T13:35:02+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_caseinfo(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_CASESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    suri.append(SECURITY_URL_PATH_S_INFO);
+
+    http_message hm;
+    int ret = hm.del(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete case info failed.\n");
+        return -1;
+    }
+    printf("delete case file success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   dispositions
+ * @Brief
+ * @DateTime 2018-08-08T13:40:39+0800
+ * @Modify   2018-08-08T13:40:39+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    dispList [description]
+ * @return   [description]
+ */
+int security_viid::dispositions(const char* ip, int port, std::vector<security_disposition_t>& dispList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
+    std::string sxml = security_message_factory::makeCaseInfoMessage(dispList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("disposition failed.\n");
+        return -1;
+    }
+    printf("disposition success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_disposition
+ * @Brief
+ * @DateTime 2018-08-08T13:44:01+0800
+ * @Modify   2018-08-08T13:44:01+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_disposition(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get disposition list failed.\n");
+        return -1;
+    }
+    printf("get disposition list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   update_disposition
+ * @Brief
+ * @DateTime 2018-08-08T13:45:57+0800
+ * @Modify   2018-08-08T13:45:57+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    dispList [description]
+ * @return   [description]
+ */
+int security_viid::update_disposition(const char* ip, int port, std::vector<security_disposition_t>& dispList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
+    std::string sxml = security_message_factory::makeDispositionMessage(dispList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update disposition failed.\n");
+        return -1;
+    }
+    printf("update disposition success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   delete_disposition
+ * @Brief
+ * @DateTime 2018-08-08T13:46:52+0800
+ * @Modify   2018-08-08T13:46:52+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_disposition(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete disposition failed.\n");
+        return -1;
+    }
+    printf("delete disposition success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   undispositions
+ * @Brief
+ * @DateTime 2018-08-08T13:49:53+0800
+ * @Modify   2018-08-08T13:49:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::undispositions(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONSS);
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("undisposition failed.\n");
+        return -1;
+    }
+    printf("undisposition success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   disposition_notifacations
+ * @Brief
+ * @DateTime 2018-08-08T13:57:33+0800
+ * @Modify   2018-08-08T13:57:33+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    dispnotiList [description]
+ * @return   [description]
+ */
+int security_viid::disposition_notifications(const char* ip, int port, std::vector<security_disposition_notify_t>& dispnotiList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPNOTI);
+    std::string sxml = security_message_factory::makeDispositionNotifyMessage(dispnotiList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("disposition notification failed.\n");
+        return -1;
+    }
+    printf("disposition notification success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_disposition_notifacation
+ * @Brief
+ * @DateTime 2018-08-08T13:57:28+0800
+ * @Modify   2018-08-08T13:57:28+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_disposition_notification(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPNOTI);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get disposition notification list failed.\n");
+        return -1;
+    }
+    printf("get disposition notification list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   delete_disposition_notification
+ * @Brief
+ * @DateTime 2018-08-08T13:59:46+0800
+ * @Modify   2018-08-08T13:59:46+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_disposition_notification(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_DISPNOTI);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete disposition notification failed.\n");
+        return -1;
+    }
+    printf("delete disposition notification success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   subscribes
+ * @Brief
+ * @DateTime 2018-08-08T14:03:22+0800
+ * @Modify   2018-08-08T14:03:22+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    subscribeList [description]
+ * @return   [description]
+ */
+int security_viid::subscribes(const char* ip, int port, std::vector<security_subscribe_t>& subscribeList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
+    std::string sxml = security_message_factory::makeSubscribeListMessage(subscribeList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("subscribe list failed.\n");
+        return -1;
+    }
+    printf("subscribe list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_subscribes
+ * @Brief
+ * @DateTime 2018-08-08T14:05:53+0800
+ * @Modify   2018-08-08T14:05:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_subscribes(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get subscribe list failed.\n");
+        return -1;
+    }
+    printf("get subscribe list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   update_subscribes
+ * @Brief
+ * @DateTime 2018-08-08T14:07:16+0800
+ * @Modify   2018-08-08T14:07:16+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    subscribeList [description]
+ * @return   [description]
+ */
+int security_viid::update_subscribes(const char* ip, int port, std::vector<security_subscribe_t>& subscribeList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
+    std::string sxml = security_message_factory::makeSubscribeListMessage(subscribeList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update subscribe list failed.\n");
+        return -1;
+    }
+    printf("update subscribe list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   delete_subscribes
+ * @Brief
+ * @DateTime 2018-08-08T14:07:53+0800
+ * @Modify   2018-08-08T14:07:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_subscribes(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete subscribe list failed.\n");
+        return -1;
+    }
+    printf("delete subscribe list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   unsubscribes
+ * @Brief
+ * @DateTime 2018-08-08T14:09:53+0800
+ * @Modify   2018-08-08T14:09:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::unsubscribes(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBESS);
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("undisposition failed.\n");
+        return -1;
+    }
+    printf("undisposition success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   subscribe_notifications
+ * @Brief
+ * @DateTime 2018-08-08T14:16:02+0800
+ * @Modify   2018-08-08T14:16:02+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    subscribenotiList [description]
+ * @return   [description]
+ */
+int security_viid::subscribe_notifications(const char* ip, int port, std::vector<security_subscribe_notify_t>& subscribenotiList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRNOTI);
+    std::string sxml = security_message_factory::makeDispositionNotifyMessage(subscribenotiList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("subscribe notification failed.\n");
+        return -1;
+    }
+    printf("subscribe notification success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_subscribe_notifications
+ * @Brief
+ * @DateTime 2018-08-08T14:17:00+0800
+ * @Modify   2018-08-08T14:17:00+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_subscribe_notifications(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRNOTI);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get subscribe notification list failed.\n");
+        return -1;
+    }
+    printf("get subscribe notification list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   delete_subscribe_notifications
+ * @Brief
+ * @DateTime 2018-08-08T14:17:35+0800
+ * @Modify   2018-08-08T14:17:35+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_subscribe_notifications(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete subscribe notification list failed.\n");
+        return -1;
+    }
+    printf("delete subscribe notification list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_analysis_rules
+ * @Brief
+ * @DateTime 2018-08-08T14:20:31+0800
+ * @Modify   2018-08-08T14:20:31+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    analysisRuleList [description]
+ * @return   [description]
+ */
+int security_viid::query_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string info = queryCondition(key, value);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), info);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get analysis rule list failed.\n");
+        return -1;
+    }
+    printf("get analysis rule list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   add_analysis_rules
+ * @Brief
+ * @DateTime 2018-08-08T14:23:53+0800
+ * @Modify   2018-08-08T14:23:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    analysisRuleList [description]
+ * @return   [description]
+ */
+int security_viid::add_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULES);
+    if (!key || strlen(key) < 1) {
+        printf("key invalid.\n");
+        return -1;
+    }
+    std::string sxml = security_message_factory::makeAnalysisRuleListMessage(analysisRuleList);
+    http_message hm;
+    int ret = hm.get(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add analysis rule list failed.\n");
+        return -1;
+    }
+    printf("add analysis rule list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // pase  list
+    return 0;
+}
+/**
+ * @Method   update_analysis_rules
+ * @Brief
+ * @DateTime 2018-08-08T14:26:06+0800
+ * @Modify   2018-08-08T14:26:06+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    analysisRuleList [description]
+ * @return   [description]
+ */
+int security_viid::update_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULES);
+    std::string sxml = security_message_factory::makeAnalysisRuleListMessage(analysisRuleList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update analysis rule list failed.\n");
+        return -1;
+    }
+    printf("update analysis rule list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   delete_analysis_rules
+ * @Brief
+ * @DateTime 2018-08-08T14:27:02+0800
+ * @Modify   2018-08-08T14:27:02+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_analysis_rules(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULES);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete analysis rule list failed.\n");
+        return -1;
+    }
+    printf("delete analysis rule list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse ResponseStatus
+    return 0;
+}
+/**
+ * @Method   query_analysis_rule
+ * @Brief
+ * @DateTime 2018-08-08T14:32:23+0800
+ * @Modify   2018-08-08T14:32:23+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_analysis_rule(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get analysis rule failed.\n");
+        return -1;
+    }
+    printf("get analysis rule success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   add_analysis_rule
+ * @Brief
+ * @DateTime 2018-08-08T14:34:04+0800
+ * @Modify   2018-08-08T14:34:04+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    analysisRule [description]
+ * @return   [description]
+ */
+int security_viid::add_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeAnalysisRuleObjectMessage(analysisRule);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add analysis rule failed.\n");
+        return -1;
+    }
+    printf("add analysis rule success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   update_analysis_rule
+ * @Brief
+ * @DateTime 2018-08-08T14:35:01+0800
+ * @Modify   2018-08-08T14:35:01+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    analysisRule [description]
+ * @return   [description]
+ */
+int security_viid::update_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeAnalysisRuleObjectMessage(analysisRule);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update analysis rule failed.\n");
+        return -1;
+    }
+    printf("update analysis rule success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   delete_analysis_rule
+ * @Brief
+ * @DateTime 2018-08-08T14:35:56+0800
+ * @Modify   2018-08-08T14:35:56+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_analysis_rule(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULESS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.del(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete analysis rule failed.\n");
+        return -1;
+    }
+    printf("delete analysis rule success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   query_video_labels
+ * @Brief
+ * @DateTime 2018-08-08T14:45:43+0800
+ * @Modify   2018-08-08T14:45:43+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    key [description]
+ * @param    value [description]
+ * @return   [description]
+ */
+int security_viid::query_video_labels(const char* ip, int port, const char* key, const char* value) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get video label list failed.\n");
+        return -1;
+    }
+    printf("get video label list success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   add_video_labels
+ * @Brief
+ * @DateTime 2018-08-08T14:45:53+0800
+ * @Modify   2018-08-08T14:45:53+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    videoLabel [description]
+ * @return   [description]
+ */
+int security_viid::add_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeVideoLabelListMessage(videoLabelList);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add video label failed.\n");
+        return -1;
+    }
+    printf("add video label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   update_video_labels
+ * @Brief
+ * @DateTime 2018-08-08T14:46:25+0800
+ * @Modify   2018-08-08T14:46:25+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    videoLabel [description]
+ * @return   [description]
+ */
+int security_viid::update_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeVideoLabelListMessage(videoLabelList);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update video label failed.\n");
+        return -1;
+    }
+    printf("update video label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   delete_video_labels
+ * @Brief
+ * @DateTime 2018-08-08T14:46:32+0800
+ * @Modify   2018-08-08T14:46:32+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    idList [description]
+ * @param    values [description]
+ * @return   [description]
+ */
+int security_viid::delete_video_labels(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
+    std::string condi;
+
+    http_message hm;
+    int ret = hm.del(suri.c_str(), condi);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete video label failed.\n");
+        return -1;
+    }
+    printf("delete video label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   query_video_label
+ * @Brief
+ * @DateTime 2018-08-08T14:53:04+0800
+ * @Modify   2018-08-08T14:53:04+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::query_video_label(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.get(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("get video label failed.\n");
+        return -1;
+    }
+    printf("get videl label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   add_video_label
+ * @Brief
+ * @DateTime 2018-08-08T14:53:16+0800
+ * @Modify   2018-08-08T14:53:16+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    videoLabel [description]
+ * @return   [description]
+ */
+int security_viid::add_video_label(const char* ip, int port, security_video_label_t* videoLabel) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeVideoLabelMessage(videoLabel);
+
+    http_message hm;
+    int ret = hm.post(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("add video label failed.\n");
+        return -1;
+    }
+    printf("add videl label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   update_video_label
+ * @Brief
+ * @DateTime 2018-08-08T14:53:28+0800
+ * @Modify   2018-08-08T14:53:28+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    videoLabel [description]
+ * @return   [description]
+ */
+int security_viid::update_video_label(const char* ip, int port, security_video_label_t* videoLabel) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+    std::string sxml = security_message_factory::makeVideoLabelMessage(videoLabel);
+
+    http_message hm;
+    int ret = hm.put(suri.c_str(), sxml);
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("update video label failed.\n");
+        return -1;
+    }
+    printf("update videl label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
+}
+/**
+ * @Method   delete_video_label
+ * @Brief
+ * @DateTime 2018-08-08T14:53:44+0800
+ * @Modify   2018-08-08T14:53:44+0800
+ * @Author   Anyz
+ * @param    ip [description]
+ * @param    port [description]
+ * @param    id [description]
+ * @return   [description]
+ */
+int security_viid::delete_video_label(const char* ip, int port, const char* id) {
+    std::string suri = addressPrefix(ip, port);
+    if (suri.empty()) {
+        printf("address incorrect.\n");
+        return -1;
+    }
+    suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELSS);
+    if (!id || strlen(id) < 1) {
+        printf("ID invalid.\n");
+        return -1;
+    }
+    suri.append(id);
+
+    http_message hm;
+    int ret = hm.del(suri.c_str());
+    std::string respData;
+    respData = hm.message();
+    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+        printf("delete video label failed.\n");
+        return -1;
+    }
+    printf("delete videl label success.\n");
+    printf("response: %s\n", respData.c_str());
+    // parse 
+    return 0;
 }
-
-int security_viid::delete_video_labels() {
-    
-}
-
-int security_viid::query_video_label() {
-    
-}
-
-int security_viid::add_video_label() {
-    
-}
-
-int security_viid::update_video_label() {
-    
-}
-
-int security_viid::delete_video_label() {
-    
-}
-
-
-
-
-
-
-
-
-
 /**
  * @Method   addressPrefix
  * @Brief
@@ -2043,9 +4391,3 @@ std::string security_viid::queryCondition(const char* key, const char* value) {
     s.append(value);
     return s;
 }
-
-
-
-
-
-

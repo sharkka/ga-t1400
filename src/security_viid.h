@@ -72,78 +72,92 @@ public:
     int    delete_person(const char* ip, int port, const char* id);
 
     int    query_faces(const char* ip, int port, const char* id);
-    int    add_faces();
-    int    delete_faces();
-    int    query_face();
-    int    add_face();
+    int    add_faces(const char* ip, int port, std::vector<security_face_object_t>& faceList);
+    int    delete_faces(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    query_face(const char* ip, int port, const char* id);
+    int    update_face(const char* ip, int port, const security_face_object_t* faceObj);
+    int    delete_face(const char* ip, int port, const char* id);
+
+    int    query_vehicles(const char* ip, int port, const char* key, const char* value);
+    int    add_vehiclies(const char* ip, int port, std::vector<security_motorvehicle_object_t>& vehicleList);
+    int    update_vehicles(const char* ip, int port, std::vector<security_motorvehicle_object_t>& vehicleList);
+    int    delete_vehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    query_motorvehicle(const char* ip, int port, const char* id);
+    int    add_motorvehicle(const char* ip, int port, const security_motorvehicle_object_t* vehicleObj);
+    int    delete_motorvehicles(const char* ip, int port, const char* id);
+
+    int    query_nonmotorvehicles(const char* ip, int port, const char* key, const char* value);
+    int    add_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList);
+    int    update_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList);
+    int    delete_nonmotorvehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    query_nonmotorvehicle(const char* ip, int port, const char* id);
+    int    add_nonmotorvehicle(const char* ip, int port, const security_nonmotorvehicle_object_t* nvehicleObj);
+    int    delete_nonmotorvehicle(const char* ip, int port, const char* id);
+
+    int    query_things(const char* ip, int port, const char* key, const char* value);
+    int    add_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList);
+    int    update_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList);
+    int    delete_things(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    query_thing(const char* ip, int port, const char* id);
+    int    insert_thing(const char* ip, int port, const security_thing_object_t* thingObj);
+    int    delete_thing(const char* ip, int port, const char* id);
     
-    int    delete_face();
-    int    query_vehicles();
-    int    add_vehicles();
-    int    delete_vehicles();
-    int    query_vehicle();
-    int    add_vehicle();
-    int    delete_vehicles();
-    int    query_novehicles();
-    int    add_nonvehicles();
-    int    delete_nonvehicles();
-    int    query_nonvehicle();
-    int    add_nonvehicle();
-    int    delete_nonvehicle();
-    int    query_things();
-    int    add_things();
-    int    delete_things();
-    int    query_thing();
-    int    insert_thing();
-    int    delete_thing();
-    int    query_scenes();
-    int    add_scenes();
-    int    delete_scenes();
-    int    query_scene();
-    int    add_scene();
-    int    delete_scene();
-    int    query_cases();
-    int    add_cases();
-    int    delete_cases();
-    int    query_case();
-    int    add_case();
-    int    delete_case();
-    int    query_caseinfo();
-    int    add_caseinfo();
-    int    delete_caseinfo();
-    int    dispositions();
-    int    query_disposition();
-    int    update_disposition();
-    int    delete_disposition();
-    int    undispostions();
-    int    disposition_notifications();
-    int    query_disposition_notification();
-    int    delete_disposition_notification();
-    int    subscribes();
-    int    query_subscribes();
-    int    update_subscribes();
-    int    delete_subscribes();
-    int    unsubscribes();
-    int    subscribe_notifications();
-    int    query_subscribe_notifications();
-    int    update_subscribe_notifications();
-    int    delete_subscribe_notifications();
-    int    query_analysis_rules();
-    int    add_analysis_rules();
-    int    update_analysis_rules();
-    int    delete_analysis_rules();
-    int    query_analysis_rule();
-    int    add_analysis_rule();
-    int    update_analysis_rule();
-    int    delete_analysis_rule();
-    int    query_video_labels();
-    int    add_video_labels();
-    int    update_video_labels();
-    int    delete_video_labels();
-    int    query_video_label();
-    int    add_video_label();
-    int    update_video_label();
-    int    delete_video_label();
+    int    query_scenes(const char* ip, int port, const char* key, const char* value);
+    int    add_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList);
+    int    update_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList);
+    int    delete_scenes(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    query_scene(const char* ip, int port, const char* id);
+    int    add_scene(const char* ip, int port, const security_scene_object_t* sceneObj);
+    int    delete_scene(const char* ip, int port, const char* id);
+
+    int    query_cases(const char* ip, int port, const char* key, const char* value);
+    int    add_cases(const char* ip, int port, std::vector<security_case_object_t>& caseList);
+
+    int    query_case(const char* ip, int port, const char* id);
+    int    add_case(const char* ip, int port, const security_case_object_t* caseObj);
+    int    delete_case(const char* ip, int port, const char* id);
+
+    int    query_caseinfo(const char* ip, int port, const char* id);
+    int    update_caseinfo(const char* ip, int port, const char* id, const security_case_info_t* caseInfo);
+    int    delete_caseinfo(const char* ip, int port, const char* id);
+
+    int    dispositions(const char* ip, int port, std::vector<security_disposition_t>& dispList);
+    int    query_disposition(const char* ip, int port, const char* key, const char* value);
+    int    update_disposition(const char* ip, int port, std::vector<security_disposition_t>& dispList);
+    int    delete_disposition(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+
+    int    undispositions(const char* ip, int port, const char* id);
+    int    disposition_notifications(const char* ip, int port, std::vector<security_disposition_notify_t>& dispnotiList);
+    int    query_disposition_notification(const char* ip, int port, const char* key, const char* value);
+    int    delete_disposition_notification(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    subscribes(const char* ip, int port, std::vector<security_subscribe_t>& subscribeList);
+    int    query_subscribes(const char* ip, int port, const char* key, const char* value);
+    int    delete_subscribes(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    unsubscribes(const char* ip, int port, const char* id);
+    
+    int    subscribe_notifications(const char* ip, int port, std::vector<security_subscribe_notify_t>& subscribenotiList);
+    int    query_subscribe_notifications(const char* ip, int port, const char* key, const char* value);
+    int    delete_subscribe_notifications(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    query_analysis_rules(const char* ip, int port, const char* key, const char* value);
+    int    add_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList);
+    int    update_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList);
+    int    delete_analysis_rules(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    query_analysis_rule(const char* ip, int port, const char* key, const char* value);
+    int    add_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule);
+    int    update_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule);
+    int    delete_analysis_rule(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    query_video_labels(const char* ip, int port, const char* key, const char* value);
+    int    add_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList);
+    int    update_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList);
+    int    delete_video_labels(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    query_video_label(const char* ip, int port, const char* id);
+    int    add_video_label(const char* ip, int port, security_video_label_t* videoLabel);
+    int    update_video_label(const char* ip, int port, security_video_label_t* videoLabel);
+    int    delete_video_label(const char* ip, int port, const char* id);
     
 private:
     const char* num2String(int port) {static char buff[32]={0}; sprintf(buff, "%d", port); return buff;}
