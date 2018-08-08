@@ -241,7 +241,7 @@ std::string security_message_factory::makeImageObjectMessage(const security_imag
     return sxml;
 }
 
-std::string security_message_factory::makeFileObjectMessage(const security_file_object_t* fo) {
+std::string security_message_factory::makeFileObjectMessage(const security_file_t* fo) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "File");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -268,7 +268,7 @@ std::string security_message_factory::makeFileObjectMessage(const security_file_
  * @param    fo [description]
  * @return   [description]
  */
-std::string security_message_factory::makeFileListMessage(const security_file_object_t* fo) {
+std::string security_message_factory::makeFileListMessage(const security_file_t* fo) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "Fileist");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -311,7 +311,7 @@ std::string security_message_factory::makeFileInfoMessage(const security_file_in
  * @param    personList [description]
  * @return   [description]
  */
-std::string security_message_factory::makePersonListMessage(std::vector<security_person_object_t>& personList) {
+std::string security_message_factory::makePersonListMessage(std::vector<security_person_t>& personList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "PersonList");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -333,7 +333,7 @@ std::string security_message_factory::makePersonListMessage(std::vector<security
  * @param    personList [description]
  * @return   [description]
  */
-std::string security_message_factory::makePersonObjMessage(security_person_object_t* personObj) {
+std::string security_message_factory::makePersonObjectMessage(security_person_t* personObj) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "Person");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -353,7 +353,85 @@ std::string security_message_factory::makePersonObjMessage(security_person_objec
     return sxml;
 }
 
+std::string security_message_factory::makeFaceListMessage(std::vector<security_face_t>& faceList) {
+    return SECURITY_STRING_EMPTY;
+}
 
+std::string security_message_factory::makeFaceMessage(const security_face_t* faceObject) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeMotorVehicleMessage(const security_motorvehicle_t* motorVehicle) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeNonMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeNonMotorVehicleMessage(const security_nonmotorvehicle_t* nonmotorVehicle) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeThingListMessage(std::vector<security_thing_t>& thingList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeThingMessage(const security_thing_t* thingObject) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeSceneListMessage(std::vector<security_scene_t>& sceneList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeSceneMessage(const security_scene_t* scemeObject) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeCaseListMessage(std::vector<security_case_t>& caseList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeCaseMessage(const security_case_t* caseObject) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeCaseInfoMessage(const security_caseinfo_t* caseInfo) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeDispositionMessage(const security_disposition_t* disp) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeDispositionNotifyMessage(const security_disposition_notification_t* dispNoti) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeSubscribeListMessage(std::vector<security_subscribe_t>& subscribeList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeAnalysisRuleListMessage(std::vector<security_analysis_rule_t>& analysisRuleList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeVideoLabelListMessage(std::vector<security_videolabel_t>& videoLabelList) {
+    return SECURITY_STRING_EMPTY;
+}
+
+std::string security_message_factory::makeVideoLabelMessage(const security_videolabel_t* videoLabel) {
+    return SECURITY_STRING_EMPTY;
+}
 
 
 

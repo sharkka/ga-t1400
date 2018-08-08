@@ -8,6 +8,7 @@
 #define __SECURITY_MESSAGE_FACTORY_H_
 
 #include <string>
+#include <vector>
 
 /**
  * @Struct   security_image_info_t
@@ -109,9 +110,9 @@ typedef struct _security_file_info {
  * @Modify   2018-08-01T10:52:46+0800
  * @Author   Anyz
  */
-typedef struct _security_person_object {
+typedef struct _security_person_t {
     
-} security_person_object_t;
+} security_person_t;
 /**
  * @Struct   security_face_object_t
  * @Brief
@@ -119,29 +120,29 @@ typedef struct _security_person_object {
  * @Modify   2018-08-01T10:52:46+0800
  * @Author   Anyz
  */
-typedef struct _security_face_object {
+typedef struct _security_face_t {
 
-} security_face_object_t;
+} security_face_t;
 
-typedef struct _security_motorvehicle_object {
+typedef struct _security_motorvehicle_t {
 
-} security_motorvehicle_object_t;
+} security_motorvehicle_t;
 
-typedef struct _security_nonmotorvehicle_object {
+typedef struct _security_nonmotorvehicle_t {
 
-} security_nonmotorvehicle_object_t;
+} security_nonmotorvehicle_t;
 
-typedef struct _security_thing_object {
+typedef struct _security_thing_t {
 
-} security_thing_object_t;
+} security_thing_t;
 
-typedef struct _security_scene_object {
+typedef struct _security_scene_t {
 
-} security_scene_object_t;
+} security_scene_t;
 
-typedef struct _security_case_object {
+typedef struct _security_case_t {
 
-} security_case_object_t;
+} security_case_t;
 
 typedef struct _security_caseinfo_t {
 
@@ -151,10 +152,22 @@ typedef struct _security_disposition_t {
 
 } security_disposition_t;
 
+typedef struct _security_disposition_notification_t {
+
+} security_disposition_notification_t;
+
 typedef struct _security_analysis_rule_t {
 
 } security_analysis_rule_t;
 
+typedef struct _security_videolabel_t {
+
+} security_videolabel_t;
+
+
+typedef struct _security_subscribe_t {
+
+} security_subscribe_t;
 
 
 
@@ -179,13 +192,32 @@ public:
     static std::string makeVideoSliceInfoListMessage();
     static std::string makeImageListMessage(int minOccurs, int maxOccurs);
     static std::string makeImageObjectMessage(const char* uri);
-    static std::string makeImageInfoMessage(const security_image_info_t* info);
-    static std::string makeFileListMessage(const security_file_object_t* fo);
-    static std::string makeFileObjectMessage(const security_file_object_t* fo);
-    static std::string makeFileInfoMessage(const security_file_object_t* fo);
-    static std::string makePersonListMessage();
-    static std::string makePersonObjectMessage();
-    static std::string makeFaceListMessage();
+    static std::string makeImageInfoMessage(const security_image_info_t* imageInfo);
+    static std::string makeFileListMessage(std::vector<security_file_t>& fileList);
+    static std::string makeFileObjectMessage(const security_file_t* fileObject);
+    static std::string makeFileInfoMessage(const security_file_info_t* fileInfo);
+    static std::string makePersonListMessage(std::vector<security_person_t>& personList);
+    static std::string makePersonObjectMessage(const security_person_t* personObject);
+    static std::string makeFaceListMessage(std::vector<security_face_t>& faceList);
+    static std::string makeFaceMessage(const security_face_t* faceObject);
+    static std::string makeMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList);
+    static std::string makeMotorVehicleMessage(const security_motorvehicle_t* motorVehicle);
+    static std::string makeNonMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList);
+    static std::string makeNonMotorVehicleMessage(const security_nonmotorvehicle_t* nonmotorVehicle);
+    static std::string makeThingListMessage(std::vector<security_thing_t>& thingList);
+    static std::string makeThingMessage(const security_thing_t* thingObject);
+    static std::string makeSceneListMessage(std::vector<security_scene_t>& sceneList);
+    static std::string makeSceneMessage(const security_scene_t* scemeObject);
+    static std::string makeCaseListMessage(std::vector<security_case_t>& caseList);
+    static std::string makeCaseMessage(const security_case_t* caseObject);
+    static std::string makeCaseInfoMessage(const security_caseinfo_t* caseInfo);
+    static std::string makeDispositionMessage(const security_disposition_t* disp);
+    static std::string makeDispositionNotifyMessage(const security_disposition_notification_t* dispNoti);
+    static std::string makeSubscribeListMessage(std::vector<security_subscribe_t>& subscribeList);
+    static std::string makeAnalysisRuleListMessage(std::vector<security_analysis_rule_t>& analysisRuleList);
+    static std::string makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule);
+    static std::string makeVideoLabelListMessage(std::vector<security_videolabel_t>& videoLabelList);
+    static std::string makeVideoLabelMessage(const security_videolabel_t* videoLabel);
 
 private:
     const char* port2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}

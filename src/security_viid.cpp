@@ -3961,7 +3961,7 @@ int security_viid::add_analysis_rule(const char* ip, int port, security_analysis
         return -1;
     }
     suri.append(id);
-    std::string sxml = security_message_factory::makeAnalysisRuleObjectMessage(analysisRule);
+    std::string sxml = security_message_factory::makeAnalysisRuleMessage(analysisRule);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -3999,7 +3999,7 @@ int security_viid::update_analysis_rule(const char* ip, int port, security_analy
         return -1;
     }
     suri.append(id);
-    std::string sxml = security_message_factory::makeAnalysisRuleObjectMessage(analysisRule);
+    std::string sxml = security_message_factory::makeAnalysisRuleMessage(analysisRule);
 
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
