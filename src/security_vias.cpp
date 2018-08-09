@@ -241,7 +241,7 @@ int security_vias::update_analysis_rules(const char* ip, int port, security_anal
     return 0;
 }
 
-int security_vias::delete_analysis_rules(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_vias::delete_analysis_rules(const char* ip, int port, security_idlist_t& idList, std::string values) {
     return 0;
 }
 /**
