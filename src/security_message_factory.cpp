@@ -4,7 +4,9 @@
  * @DateTime 2018/8/4 11:36:40
  * @Author   Anyz
  */
-#include "security_message_factory.h.h"
+#include "security_message_factory.h"
+#include "security_rest.h"
+#include "simple_xml.h"
 
 /**
  * @Method   makeRegisterMessage
@@ -78,14 +80,14 @@ std::string security_message_factory::makeKeepaliveMessage(const char* deviceId)
  * @param    deviceId [description]
  * @return   [description]
  */
-std::string security_message_factory::makeAPEListMessage(int minOccurs) {
+std::string security_message_factory::makeAPEListMessage() {
     simple_xml sx;
     sx.createRoot("complexType", "name", "APEList");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
     sx.addProperity(node1, "name", "APEObject");
     sx.addProperity(node1, "type", "APE");
-    sx.addProperity(node1, "minOccurs", num2String(minOccurs));
+    sx.addProperity(node1, "minOccurs", num2String(0));
     std::string sxml = sx.buildDoc(node);
     printf("%s\n", sxml.c_str());
     return sxml;
@@ -100,56 +102,60 @@ std::string security_message_factory::makeAPEListMessage(int minOccurs) {
  * @param    maxOccurs [description]
  * @return   [description]
  */
-std::string security_message_factory::makeVideoSliceListMessage(int minOccurs, int maxOccurs) {
+std::string security_message_factory::makeVideoSliceListMessage() {
     simple_xml sx;
     sx.createRoot("complexType", "name", "VideoSliceList");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
     sx.addProperity(node1, "name", "VideoSlice");
-    sx.addProperity(node1, "minOccurs", num2String(minOccurs));
+    sx.addProperity(node1, "minOccurs", num2String(1));
 
     XMLNodeHandle subnode = sx.createChild(node, "complexType");
 
     XMLNodeHandle subnode1 = sx.createChild(subnode, "element");
     sx.addProperity(subnode1, "name", "VideoSliceInfo");
     sx.addProperity(subnode1, "type", "VideoSliceInfo");
-    sx.addProperity(subnode1, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode1, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode1, "minOccurs", num2String(1));
+    sx.addProperity(subnode1, "maxOccurs", num2String(1));
 
     XMLNodeHandle subnode2 = sx.createChild(subnode, "element");
     sx.addProperity(subnode2, "name", "PersonList");
-    sx.addProperity(subnode2, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode2, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode2, "minOccurs", num2String(1));
+    sx.addProperity(subnode2, "maxOccurs", num2String(1));
     XMLNodeHandle subnode3 = sx.createChild(subnode, "element");
     sx.addProperity(subnode3, "name", "FaceList");
-    sx.addProperity(subnode3, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode3, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode3, "minOccurs", num2String(1));
+    sx.addProperity(subnode3, "maxOccurs", num2String(1));
     XMLNodeHandle subnode4 = sx.createChild(subnode, "element");
     sx.addProperity(subnode4, "name", "MotorVehicleList");
-    sx.addProperity(subnode4, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode4, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode4, "minOccurs", num2String(1));
+    sx.addProperity(subnode4, "maxOccurs", num2String(1));
     XMLNodeHandle subnode5 = sx.createChild(subnode, "element");
     sx.addProperity(subnode5, "name", "NonMotorVehicleList");
-    sx.addProperity(subnode5, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode5, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode5, "minOccurs", num2String(1));
+    sx.addProperity(subnode5, "maxOccurs", num2String(1));
     XMLNodeHandle subnode6 = sx.createChild(subnode, "element");
     sx.addProperity(subnode6, "name", "ThingList");
-    sx.addProperity(subnode6, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode6, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode6, "minOccurs", num2String(1));
+    sx.addProperity(subnode6, "maxOccurs", num2String(1));
     XMLNodeHandle subnode7 = sx.createChild(subnode, "element");
     sx.addProperity(subnode7, "name", "SceneList");
-    sx.addProperity(subnode7, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode7, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode7, "minOccurs", num2String(1));
+    sx.addProperity(subnode7, "maxOccurs", num2String(1));
 
     XMLNodeHandle subnode8 = sx.createChild(subnode, "element");
     sx.addProperity(subnode8, "name", "Data");
     sx.addProperity(subnode8, "type", "base64Binary");
-    sx.addProperity(subnode8, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode8, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode8, "minOccurs", num2String(1));
+    sx.addProperity(subnode8, "maxOccurs", num2String(1));
 
     std::string sxml = sx.buildDoc(node);
     printf("%s\n", sxml.c_str());
     return sxml;
+}
+
+std::string security_message_factory::makeVideoSliceInfoListMessage() {
+	return SECURITY_STRING_EMPTY;
 }
 /**
  * @Method   makeImageListMessage
@@ -161,52 +167,52 @@ std::string security_message_factory::makeVideoSliceListMessage(int minOccurs, i
  * @param    maxOccurs [description]
  * @return   [description]
  */
-std::string security_message_factory::makeImageListMessage(int minOccurs, int maxOccurs) {
+std::string security_message_factory::makeImageListMessage(std::vector<security_image_t>& imageList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "ImageList");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
     sx.addProperity(node1, "name", "Image");
-    sx.addProperity(node1, "minOccurs", num2String(minOccurs));
+    sx.addProperity(node1, "minOccurs", num2String(1));
 
     XMLNodeHandle subnode = sx.createChild(node, "complexType");
 
     XMLNodeHandle subnode1 = sx.createChild(subnode, "element");
     sx.addProperity(subnode1, "name", "ImageInfo");
     sx.addProperity(subnode1, "type", "ImageInfo");
-    sx.addProperity(subnode1, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode1, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode1, "minOccurs", num2String(1));
+    sx.addProperity(subnode1, "maxOccurs", num2String(1));
 
     XMLNodeHandle subnode2 = sx.createChild(subnode, "element");
     sx.addProperity(subnode2, "name", "PersonList");
-    sx.addProperity(subnode2, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode2, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode2, "minOccurs", num2String(1));
+    sx.addProperity(subnode2, "maxOccurs", num2String(1));
     XMLNodeHandle subnode3 = sx.createChild(subnode, "element");
     sx.addProperity(subnode3, "name", "FaceList");
-    sx.addProperity(subnode3, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode3, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode3, "minOccurs", num2String(1));
+    sx.addProperity(subnode3, "maxOccurs", num2String(1));
     XMLNodeHandle subnode4 = sx.createChild(subnode, "element");
     sx.addProperity(subnode4, "name", "MotorVehicleList");
-    sx.addProperity(subnode4, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode4, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode4, "minOccurs", num2String(1));
+    sx.addProperity(subnode4, "maxOccurs", num2String(1));
     XMLNodeHandle subnode5 = sx.createChild(subnode, "element");
     sx.addProperity(subnode5, "name", "NonMotorVehicleList");
-    sx.addProperity(subnode5, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode5, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode5, "minOccurs", num2String(1));
+    sx.addProperity(subnode5, "maxOccurs", num2String(1));
     XMLNodeHandle subnode6 = sx.createChild(subnode, "element");
     sx.addProperity(subnode6, "name", "ThingList");
-    sx.addProperity(subnode6, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode6, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode6, "minOccurs", num2String(1));
+    sx.addProperity(subnode6, "maxOccurs", num2String(1));
     XMLNodeHandle subnode7 = sx.createChild(subnode, "element");
     sx.addProperity(subnode7, "name", "SceneList");
-    sx.addProperity(subnode7, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode7, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode7, "minOccurs", num2String(1));
+    sx.addProperity(subnode7, "maxOccurs", num2String(1));
 
     XMLNodeHandle subnode8 = sx.createChild(subnode, "element");
     sx.addProperity(subnode8, "name", "Data");
     sx.addProperity(subnode8, "type", "base64Binary");
-    sx.addProperity(subnode8, "minOccurs", num2String(minOccurs));
-    sx.addProperity(subnode8, "maxOccurs", num2String(maxOccurs));
+    sx.addProperity(subnode8, "minOccurs", num2String(1));
+    sx.addProperity(subnode8, "maxOccurs", num2String(1));
 
     std::string sxml = sx.buildDoc(node);
     printf("%s\n", sxml.c_str());
@@ -221,7 +227,7 @@ std::string security_message_factory::makeImageListMessage(int minOccurs, int ma
  * @param    info [description]
  * @return   [description]
  */
-std::string security_message_factory::makeImageObjectMessage(const security_image_info_t* info) {
+std::string security_message_factory::makeImageObjectMessage(const security_image_t* info) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "ImageInfo");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -239,6 +245,10 @@ std::string security_message_factory::makeImageObjectMessage(const security_imag
     std::string sxml = sx.buildDoc(node);
     printf("%s\n", sxml.c_str());
     return sxml;
+}
+
+std::string security_message_factory::makeImageInfoMessage(const security_image_info_t* imageInfo) {
+	return SECURITY_STRING_EMPTY;
 }
 
 std::string security_message_factory::makeFileObjectMessage(const security_file_t* fo) {
@@ -268,7 +278,7 @@ std::string security_message_factory::makeFileObjectMessage(const security_file_
  * @param    fo [description]
  * @return   [description]
  */
-std::string security_message_factory::makeFileListMessage(const security_file_t* fo) {
+std::string security_message_factory::makeFileListMessage(std::vector<security_file_t>& fileList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "Fileist");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -333,7 +343,7 @@ std::string security_message_factory::makePersonListMessage(std::vector<security
  * @param    personList [description]
  * @return   [description]
  */
-std::string security_message_factory::makePersonObjectMessage(security_person_t* personObj) {
+std::string security_message_factory::makePersonObjectMessage(const security_person_t* personObject) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "Person");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -369,7 +379,7 @@ std::string security_message_factory::makeMotorVehicleMessage(const security_mot
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeNonMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList) {
+std::string security_message_factory::makeNonMotorVehicleListMessage(std::vector<security_nonmotorvehicle_t>& motorVehicleList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -408,13 +418,22 @@ std::string security_message_factory::makeCaseInfoMessage(const security_caseinf
 std::string security_message_factory::makeDispositionMessage(const security_disposition_t* disp) {
     return SECURITY_STRING_EMPTY;
 }
+std::string security_message_factory::makeDispositionListMessage(std::vector<security_disposition_t>& dispList) {
+	return SECURITY_STRING_EMPTY;
+}
 
-std::string security_message_factory::makeDispositionNotifyMessage(const security_disposition_notification_t* dispNoti) {
+std::string security_message_factory::makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti) {
     return SECURITY_STRING_EMPTY;
+}
+std::string security_message_factory::makeDispositionNotifyListMessage(std::vector<security_disposition_notify_t>& dispNotifyList) {
+	return SECURITY_STRING_EMPTY;
 }
 
 std::string security_message_factory::makeSubscribeListMessage(std::vector<security_subscribe_t>& subscribeList) {
     return SECURITY_STRING_EMPTY;
+}
+std::string security_message_factory::makeSubscribeNotifyListMessage(std::vector<security_subscribe_notify_t>& subscribeNotifyList) {
+	return SECURITY_STRING_EMPTY;
 }
 
 std::string security_message_factory::makeAnalysisRuleListMessage(std::vector<security_analysis_rule_t>& analysisRuleList) {

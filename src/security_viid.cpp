@@ -45,7 +45,7 @@ int security_viid::sys_register(const char* ip, int port, const char* deviceId) 
         printf("server response %d\n", ret);
         hm.appendHeaderItem("username:admin");
         hm.appendHeaderItem("password:13579");
-        int ret = hm.post(uri, sxml);
+        int ret = hm.post(suri, sxml);
         if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
             printf("Register failed.\n");
             return -1;
@@ -142,12 +142,9 @@ int security_viid::sys_synctime(const char* ip, int port) {
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_TIME);
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
+
     http_message hm;
-    int ret = hm.get(suri.c_str());
+    int ret = hm.get(suri, SECURITY_STRING_EMPTY);
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -215,7 +212,7 @@ int security_viid::update_apes(const char* ip, int port, const char* deviceId) {
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_APES);
-    std::string sxml = security_message_factory::makeAPEListMessage(deviceId);
+    std::string sxml = security_message_factory::makeAPEListMessage();
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
     std::string respData;
@@ -364,7 +361,7 @@ int security_viid::query_video_slices(const char* ip, int port, const char* key,
     }
     std::string info = queryCondition(key, value);
     http_message hm;
-    int ret = hm.get(suri.c_str(), info);
+    int ret = hm.get(suri.c_str(), info.c_str());
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -398,7 +395,7 @@ int security_viid::add_video_slices(const char* ip, int port, const char* device
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOSLICES);
-    std::string sxml = security_message_factory::makeVideoSliceListMessage(deviceId);
+    std::string sxml = security_message_factory::makeVideoSliceListMessage();
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
     std::string respData;
@@ -477,7 +474,7 @@ int security_viid::update_video_slice(const char* ip, int port, const char* id, 
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOSLICESS);
     suri.append(id);
-    std::string sxml = security_message_factory::makeVideoSliceListMessage(deviceId);
+    std::string sxml = security_message_factory::makeVideoSliceListMessage();
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
     std::string respData;
@@ -508,14 +505,14 @@ int security_viid::delete_video_slice(const char* ip, int port, const char* id) 
         printf("address incorrect.\n");
         return -1;
     }
-    if (!deviceId || strlen(deviceId) < 1) {
+    if (!id || strlen(id) < 1) {
         printf("device ID invalid.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOSLICESS);
     suri.append(id);
     http_message hm;
-    int ret = hm.delete(suri.c_str());
+    int ret = hm.del(suri.c_str());
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -614,7 +611,7 @@ int security_viid::delete_videodata(const char* ip, int port, const char* id) {
         printf("address incorrect.\n");
         return -1;
     }
-    if (!deviceId || strlen(deviceId) < 1) {
+    if (!id || strlen(id) < 1) {
         printf("device ID invalid.\n");
         return -1;
     }
@@ -622,7 +619,7 @@ int security_viid::delete_videodata(const char* ip, int port, const char* id) {
     suri.append(id);
     suri.append(SECURITY_URL_PATH_S_DATA);
     http_message hm;
-    int ret = hm.delete(suri.c_str());
+    int ret = hm.del(suri.c_str());
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -682,19 +679,14 @@ int security_viid::query_images(const char* ip, int port, const char* key, const
  * @param    deviceId [description]
  * @return   [description]
  */
-int security_viid::add_images(const char* ip, int port, const char* deviceId) {
+int security_viid::add_images(const char* ip, int port, std::vector<security_image_t>& imageList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_IMAGES);
-    suri.append(id);
-    std::string sxml = security_message_factory::makeImageListMessage(deviceId);
+
+    std::string sxml = security_message_factory::makeImageListMessage(imageList);
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
     std::string respData;
@@ -755,7 +747,7 @@ int security_viid::query_image(const char* ip, int port, const char* id) {
  * @param    id [description]
  * @return   [description]
  */
-int security_viid::update_image(const char* ip, int port, const char* id) {
+int security_viid::update_image(const char* ip, int port, const char* id, const security_image_t* imageObject) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -767,7 +759,7 @@ int security_viid::update_image(const char* ip, int port, const char* id) {
         return -1;
     }
     suri.append(id);
-    std::string sxml = security_message_factory::makeImageMessage(id);
+    std::string sxml = security_message_factory::makeImageObjectMessage(imageObject);
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
     std::string respData;
@@ -983,7 +975,7 @@ int security_viid::add_imagedata(const char* ip, int port, const char* id, const
         printf("device ID invalid.\n");
         return -1;
     }
-    if (!buff {
+    if (!buff) {
         printf("image data invalid.\n");
         return -1;
     }
@@ -1064,7 +1056,7 @@ int security_viid::query_files(const char* ip, int port, const char* key, const 
     }
     std::string info = queryCondition(key, value);
     http_message hm;
-    int ret = hm.get(suri.c_str(), info);
+    int ret = hm.get(suri, info);
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -1087,18 +1079,14 @@ int security_viid::query_files(const char* ip, int port, const char* key, const 
  * @param    imgObj [description]
  * @return   [description]
  */
-int security_viid::add_files(const char* ip, int port, const security_image_object_t* imgObj) {
+int security_viid::update_files(const char* ip, int port, std::vector<security_image_t>& imgList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
     suri.append(SECURITY_URL_PATH_VIID_FILES);
-    std::string sxml = security_message_factory::makeFileListMessage(imgObj);
+    std::string sxml = security_message_factory::makeImageListMessage(imgList);
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
     std::string respData;
@@ -1161,7 +1149,7 @@ int security_viid::query_file(const char* ip, int port, const char* id) {
  * @param    fileObj [description]
  * @return   [description]
  */
-int security_viid::update_file(const char* ip, int port, const char* id, const char* security_file_object_t* fileObj) {
+int security_viid::update_file(const char* ip, int port, const char* id, const security_file_t* fileObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1273,7 +1261,7 @@ int security_viid::query_fileinfo(const char* ip, int port, const char* id) {
  * @param    id [description]
  * @return   [description]
  */
-int security_viid::update_fileinfo(const char* ip, int port, const char* id) {
+int security_viid::update_fileinfo(const char* ip, int port, const char* id, const security_file_info_t* fileInfo) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1503,7 +1491,7 @@ int security_viid::query_persons(const char* ip, int port, const char* key, cons
  * @param    port [description]
  * @return   [description]
  */
-int security_viid::add_persons(const char* ip, int port, std::vector<security_person_object_t>& personList) {
+int security_viid::add_persons(const char* ip, int port, std::vector<security_person_t>& personList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1536,7 +1524,7 @@ int security_viid::add_persons(const char* ip, int port, std::vector<security_pe
  * @param    personList [description]
  * @return   [description]
  */
-int security_viid::update_persons(const char* ip, int port, std::vector<security_person_object_t>& personList) {
+int security_viid::update_persons(const char* ip, int port, std::vector<security_person_t>& personList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1640,7 +1628,7 @@ int security_viid::query_person(const char* ip, int port, const char* id) {
  * @param    personObj [description]
  * @return   [description]
  */
-int security_viid::update_person(const char* ip, int port, const char* id, const security_person_object_t* personObj) {
+int security_viid::update_person(const char* ip, int port, const char* id, const security_person_t* personObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1751,14 +1739,14 @@ int security_viid::query_faces(const char* ip, int port, const char* key, const 
  * @param    port [description]
  * @return   [description]
  */
-int security_viid::update_faces(const char* ip, int port, std::vector<security_face_object_t>& faceList) {
+int security_viid::update_faces(const char* ip, int port, std::vector<security_face_t>& faceList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_FACES);
-    std::string sxml = security_message_factory::makeFaceListMessage(faceObj);
+    std::string sxml = security_message_factory::makeFaceListMessage(faceList);
 
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
@@ -1794,7 +1782,7 @@ int security_viid::delete_faces(const char* ip, int port, std::vector<std::strin
     suri.append(SECURITY_URL_PATH_VIID_FACES);
     std::string condi;
     http_message hm;
-    int ret = hm.del(suri.c_str(), condi);
+    int ret = hm.del(suri, condi);
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -1854,7 +1842,7 @@ int security_viid::query_face(const char* ip, int port, const char* id) {
  * @param    faceObj [description]
  * @return   [description]
  */
-int security_viid::update_face(const char* ip, int port, const security_face_object_t* faceObj) {
+int security_viid::update_face(const char* ip, int port, const char* id, const security_face_t* faceObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1866,7 +1854,7 @@ int security_viid::update_face(const char* ip, int port, const security_face_obj
         return -1;
     }
     suri.append(id);
-    std::string sxml = security_message_factory::makeFaceObjectMessage(faceObj);
+    std::string sxml = security_message_factory::makeFaceMessage(faceObj);
 
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
@@ -1963,14 +1951,14 @@ int security_viid::query_motorvehicles(const char* ip, int port, const char* key
  * @param    faceList [description]
  * @return   [description]
  */
-int security_viid::add_motorvehicles(const char* ip, int port, std::vector<security_vehicle_object_t>& vehicleList) {
+int security_viid::add_motorvehicles(const char* ip, int port, std::vector<security_motorvehicle_t>& motorvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_MOTORVEHIS);
-    std::string sxml = security_message_factory::makeMotorVehicleListMessage(vehicleList);
+    std::string sxml = security_message_factory::makeMotorVehicleListMessage(motorvehicleList);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -1996,7 +1984,7 @@ int security_viid::add_motorvehicles(const char* ip, int port, std::vector<secur
  * @param    faceList [description]
  * @return   [description]
  */
-int security_viid::update_motorvehicles(const char* ip, int port, std::vector<security_vehicle_object_t>& vehicleList) {
+int security_viid::update_motorvehicles(const char* ip, int port, std::vector<security_motorvehicle_t>& vehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2100,7 +2088,7 @@ int security_viid::query_motorvehicle(const char* ip, int port, const char* id) 
  * @param    vehicleObj [description]
  * @return   [description]
  */
-int security_viid::add_motorvehicle(const char* ip, int port, const security_motorvehicle_object_t* vehicleObj) {
+int security_viid::add_motorvehicle(const char* ip, int port, const char* id, const security_motorvehicle_t* vehicleObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2213,14 +2201,14 @@ int security_viid::query_nonmotorvehicles(const char* ip, int port, const char* 
  * @param    nvehicleList [description]
  * @return   [description]
  */
-int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList) {
+int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_t>& nvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
-    std::string sxml = security_message_factory::makeMotorVehicleListMessage(nvehiclieList);
+    std::string sxml = security_message_factory::makeNonMotorVehicleListMessage(nvehicleList);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -2246,14 +2234,14 @@ int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<se
  * @param    nvehicleList [description]
  * @return   [description]
  */
-int security_viid::update_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_object_t>& nvehicleList) {
+int security_viid::update_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_t>& nonvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_NONMOTORVEHIS);
-    std::string sxml = security_message_factory::makeMotorVehicleListMessage(nonvehicleList);
+    std::string sxml = security_message_factory::makeNonMotorVehicleListMessage(nonvehicleList);
 
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
@@ -2350,7 +2338,7 @@ int security_viid::query_nonmotorvehicle(const char* ip, int port, const char* i
  * @param    nvehicleObj [description]
  * @return   [description]
  */
-int security_viid::add_nonmotorvehicle(const char* ip, int port, const security_nonmotorvehicle_object_t* nvehicleObj) {
+int security_viid::add_nonmotorvehicle(const char* ip, int port, const char* id, const security_nonmotorvehicle_t* nvehicleObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2463,7 +2451,7 @@ int security_viid::query_things(const char* ip, int port, const char* key, const
  * @param    thingList [description]
  * @return   [description]
  */
-int security_viid::add_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList) {
+int security_viid::add_things(const char* ip, int port, std::vector<security_thing_t>& thingList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2496,7 +2484,7 @@ int security_viid::add_things(const char* ip, int port, std::vector<security_thi
  * @param    thingList [description]
  * @return   [description]
  */
-int security_viid::update_things(const char* ip, int port, std::vector<security_thing_object_t>& thingList) {
+int security_viid::update_things(const char* ip, int port, std::vector<security_thing_t>& thingList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2600,7 +2588,7 @@ int security_viid::query_thing(const char* ip, int port, const char* id) {
  * @param    thingObj [description]
  * @return   [description]
  */
-int security_viid::add_thing(const char* ip, int port, const security_thing_object_t* thingObj) {
+int security_viid::add_thing(const char* ip, int port, const char* id, const security_thing_t* thingObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2713,7 +2701,7 @@ int security_viid::query_scenes(const char* ip, int port, const char* key, const
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::add_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList) {
+int security_viid::add_scenes(const char* ip, int port, std::vector<security_scene_t>& sceneList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2746,7 +2734,7 @@ int security_viid::add_scenes(const char* ip, int port, std::vector<security_sce
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::update_scenes(const char* ip, int port, std::vector<security_scene_object_t>& sceneList) {
+int security_viid::update_scenes(const char* ip, int port, std::vector<security_scene_t>& sceneList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2850,7 +2838,7 @@ int security_viid::query_scene(const char* ip, int port, const char* id) {
  * @param    sceneObj [description]
  * @return   [description]
  */
-int security_viid::add_scene(const char* ip, int port, const security_scene_object_t* sceneObj) {
+int security_viid::add_scene(const char* ip, int port, const char* id, const security_scene_t* sceneObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2963,7 +2951,7 @@ int security_viid::query_cases(const char* ip, int port, const char* key, const 
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::add_cases(const char* ip, int port, std::vector<security_case_object_t>& caseList) {
+int security_viid::add_cases(const char* ip, int port, std::vector<security_case_t>& caseList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3033,7 +3021,7 @@ int security_viid::query_case(const char* ip, int port, const char* id) {
  * @param    sceneObj [description]
  * @return   [description]
  */
-int security_viid::add_case(const char* ip, int port, const security_case_object_t* caseObj) {
+int security_viid::add_case(const char* ip, int port, const char* id, const security_case_t* caseObj) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3148,7 +3136,7 @@ int security_viid::query_caseinfo(const char* ip, int port, const char* id) {
  * @param    caseInfo [description]
  * @return   [description]
  */
-int security_viid::update_caseinfo(const char* ip, int port, const char* id, const security_case_info_t* caseInfo) {
+int security_viid::update_caseinfo(const char* ip, int port, const char* id, const security_caseinfo_t* caseInfo) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3232,7 +3220,7 @@ int security_viid::dispositions(const char* ip, int port, std::vector<security_d
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
-    std::string sxml = security_message_factory::makeCaseInfoMessage(dispList);
+    std::string sxml = security_message_factory::makeDispositionListMessage(dispList);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -3295,14 +3283,14 @@ int security_viid::query_disposition(const char* ip, int port, const char* key, 
  * @param    dispList [description]
  * @return   [description]
  */
-int security_viid::update_disposition(const char* ip, int port, std::vector<security_disposition_t>& dispList) {
+int security_viid::update_disposition(const char* ip, int port, security_disposition_t* disp) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_DISPOSITIONS);
-    std::string sxml = security_message_factory::makeDispositionMessage(dispList);
+    std::string sxml = security_message_factory::makeDispositionMessage(disp);
 
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
@@ -3372,7 +3360,7 @@ int security_viid::undispositions(const char* ip, int port, const char* id) {
     suri.append(id);
 
     http_message hm;
-    int ret = hm.put(suri.c_str());
+    int ret = hm.put(suri.c_str(), SECURITY_STRING_EMPTY);
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -3402,7 +3390,7 @@ int security_viid::disposition_notifications(const char* ip, int port, std::vect
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_DISPNOTI);
-    std::string sxml = security_message_factory::makeDispositionNotifyMessage(dispnotiList);
+    std::string sxml = security_message_factory::makeDispositionNotifyListMessage(dispnotiList);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -3559,39 +3547,6 @@ int security_viid::query_subscribes(const char* ip, int port, const char* key, c
     return 0;
 }
 /**
- * @Method   update_subscribes
- * @Brief
- * @DateTime 2018-08-08T14:07:16+0800
- * @Modify   2018-08-08T14:07:16+0800
- * @Author   Anyz
- * @param    ip [description]
- * @param    port [description]
- * @param    subscribeList [description]
- * @return   [description]
- */
-int security_viid::update_subscribes(const char* ip, int port, std::vector<security_subscribe_t>& subscribeList) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_SUBSCRIBES);
-    std::string sxml = security_message_factory::makeSubscribeListMessage(subscribeList);
-
-    http_message hm;
-    int ret = hm.put(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("update subscribe list failed.\n");
-        return -1;
-    }
-    printf("update subscribe list success.\n");
-    printf("response: %s\n", respData.c_str());
-    // parse ResponseStatus
-    return 0;
-}
-/**
  * @Method   delete_subscribes
  * @Brief
  * @DateTime 2018-08-08T14:07:53+0800
@@ -3646,7 +3601,7 @@ int security_viid::unsubscribes(const char* ip, int port, const char* id) {
     suri.append(id);
 
     http_message hm;
-    int ret = hm.put(suri.c_str());
+    int ret = hm.put(suri.c_str(), SECURITY_STRING_EMPTY);
     std::string respData;
     respData = hm.message();
     if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
@@ -3676,7 +3631,7 @@ int security_viid::subscribe_notifications(const char* ip, int port, std::vector
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_SUBSCRNOTI);
-    std::string sxml = security_message_factory::makeDispositionNotifyMessage(subscribenotiList);
+    std::string sxml = security_message_factory::makeSubscribeNotifyListMessage(subscribenotiList);
 
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
@@ -3773,7 +3728,7 @@ int security_viid::delete_subscribe_notifications(const char* ip, int port, std:
  * @param    analysisRuleList [description]
  * @return   [description]
  */
-int security_viid::query_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+int security_viid::query_analysis_rules(const char* ip, int port, const char* key, const char* value) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3816,10 +3771,6 @@ int security_viid::add_analysis_rules(const char* ip, int port, std::vector<secu
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_ANALYSISRULES);
-    if (!key || strlen(key) < 1) {
-        printf("key invalid.\n");
-        return -1;
-    }
     std::string sxml = security_message_factory::makeAnalysisRuleListMessage(analysisRuleList);
     http_message hm;
     int ret = hm.get(suri.c_str(), sxml);
@@ -3949,7 +3900,7 @@ int security_viid::query_analysis_rule(const char* ip, int port, const char* id)
  * @param    analysisRule [description]
  * @return   [description]
  */
-int security_viid::add_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule) {
+int security_viid::add_analysis_rule(const char* ip, int port, const char* id, security_analysis_rule_t* analysisRule) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3987,7 +3938,7 @@ int security_viid::add_analysis_rule(const char* ip, int port, security_analysis
  * @param    analysisRule [description]
  * @return   [description]
  */
-int security_viid::update_analysis_rule(const char* ip, int port, security_analysis_rule_object_t* analysisRule) {
+int security_viid::update_analysis_rule(const char* ip, int port, const char* id, security_analysis_rule_t* analysisRule) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -4070,12 +4021,6 @@ int security_viid::query_video_labels(const char* ip, int port, const char* key,
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
-    if (!id || strlen(id) < 1) {
-        printf("ID invalid.\n");
-        return -1;
-    }
-    suri.append(id);
-
     http_message hm;
     int ret = hm.get(suri.c_str());
     std::string respData;
@@ -4100,18 +4045,13 @@ int security_viid::query_video_labels(const char* ip, int port, const char* key,
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::add_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList) {
+int security_viid::add_video_labels(const char* ip, int port, std::vector<security_videolabel_t>& videoLabelList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
-    if (!id || strlen(id) < 1) {
-        printf("ID invalid.\n");
-        return -1;
-    }
-    suri.append(id);
     std::string sxml = security_message_factory::makeVideoLabelListMessage(videoLabelList);
 
     http_message hm;
@@ -4138,18 +4078,13 @@ int security_viid::add_video_labels(const char* ip, int port, std::vector<securi
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::update_video_labels(const char* ip, int port, std::vector<security_video_label_t>& videoLabelList) {
+int security_viid::update_video_labels(const char* ip, int port, std::vector<security_videolabel_t>& videoLabelList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOLABELS);
-    if (!id || strlen(id) < 1) {
-        printf("ID invalid.\n");
-        return -1;
-    }
-    suri.append(id);
     std::string sxml = security_message_factory::makeVideoLabelListMessage(videoLabelList);
 
     http_message hm;
@@ -4247,7 +4182,7 @@ int security_viid::query_video_label(const char* ip, int port, const char* id) {
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::add_video_label(const char* ip, int port, security_video_label_t* videoLabel) {
+int security_viid::add_video_label(const char* ip, int port, const char* id, security_videolabel_t* videoLabel) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -4285,7 +4220,7 @@ int security_viid::add_video_label(const char* ip, int port, security_video_labe
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::update_video_label(const char* ip, int port, security_video_label_t* videoLabel) {
+int security_viid::update_video_label(const char* ip, int port, const char* id, security_videolabel_t* videoLabel) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
