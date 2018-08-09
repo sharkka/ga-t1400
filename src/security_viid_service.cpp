@@ -11,36 +11,7 @@
 
 
 int security_viid_service::sys_register(const char* ip, int port, const char* deviceId) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_REGISTER);
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
-
-    http_message hm;
-    std::string sxml = makeRegisterMessage(deviceId);
-    int ret = hm.post(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    printf("response: %s\n", respData.c_str());
-    if (SECURITY_REST_HTTP_RESPONSE_401 == hm.errorCode()) {
-        http_message hm;
-        
-        printf("server response %d\n", ret);
-        hm.appendHeaderItem("username:admin");
-        hm.appendHeaderItem("password:13579");
-        int ret = hm.post(uri, sxml);
-        if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-            printf("Register failed.\n");
-            return -1;
-        }
-    }
-    printf("Register success.");
+    
     return 0;
 }
 /**
@@ -55,27 +26,7 @@ int security_viid_service::sys_register(const char* ip, int port, const char* de
  * @return   [description]
  */
 int security_viid_service::sys_unregister(const char* ip, int port, const char* deviceId) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_UNREGISTER);
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
-    http_message hm;
-    std::string sxml = makeUnregisterMessage(deviceId);
-    int ret = hm.post(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    printf("response: %s\n", respData.c_str());
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("Unregister failed.\n");
-        return -1;
-    }
-    printf("Unregister success.");
+    
     return 0;
 }
 /**
@@ -90,28 +41,7 @@ int security_viid_service::sys_unregister(const char* ip, int port, const char* 
  * @return   [description]
  */
 int security_viid_service::sys_keepalive(const char* ip, int port, const char* deviceId) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_KEEPALIVE);
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
-
-    http_message hm;
-    std::string sxml = makeKeepaliveMessage(deviceId);
-    int ret = hm.post(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    printf("response: %s\n", respData.c_str());
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("Keep alive failed.\n");
-        return -1;
-    }
-    printf("Keep alive success.");
+    
     return 0;
 }
 /**
@@ -125,28 +55,7 @@ int security_viid_service::sys_keepalive(const char* ip, int port, const char* d
  * @return   [description]
  */
 int security_viid_service::sys_synctime(const char* ip, int port) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_TIME);
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
-    http_message hm;
-    int ret = hm.post(suri.c_str());
-    std::string respData;
-    respData = hm.message();
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("Keep alive failed.\n");
-        return -1;
-    }
-
-    printf("Keep alive success.\n");
-    printf("response: %s\n", respData.c_str());
-    // synchorize your system time
+    
     return 0;
 }
 /**
@@ -162,27 +71,7 @@ int security_viid_service::sys_synctime(const char* ip, int port) {
  * @return   [description]
  */
 int security_viid_service::query_apes(const char* ip, int port, const char* key, const char* value) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_APES);
-    if (!key || strlen(key) < 5) {
-        printf("IP address invalid.\n");
-        return -1;
-    }
-    http_message hm;
-    int ret = hm.post(suri.c_str());
-    std::string respData;
-    respData = hm.message();
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("get APE list failed.\n");
-        return -1;
-    }
-    printf("get APE list success.\n");
-    printf("response: %s\n", respData.c_str());
-    // pase APE list
+    
     return 0;
 }
 /**
@@ -194,28 +83,7 @@ int security_viid_service::query_apes(const char* ip, int port, const char* key,
  * @return   [description]
  */
 int security_viid_service::update_apes(const char* ) {
-    std::string suri = addressPrefix(ip, port);
-    if (suri.empty()) {
-        printf("address incorrect.\n");
-        return -1;
-    }
-    suri.append(SECURITY_URL_PATH_VIID_APES);
-    if (!key || strlen(key) < 5) {
-        printf("IP address invalid.\n");
-        return -1;
-    }
-    std::string sxml = makeAPEListMessage(deviceId);
-    http_message hm;
-    int ret = hm.put(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("get APE list failed.\n");
-        return -1;
-    }
-    printf("get APE list success.\n");
-    printf("response: %s\n", respData.c_str());
-    // pase APE list
+    
     return 0;
 }
 

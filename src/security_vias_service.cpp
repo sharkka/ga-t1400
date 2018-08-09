@@ -6,7 +6,6 @@
  */
 #include "security_vias_service.h"
 #include "simple_xml.h"
-#include "http_message.h"
 #include "security_rest.h"
 #include "security_message_factory.h"
 

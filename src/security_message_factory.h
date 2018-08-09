@@ -263,6 +263,29 @@ typedef struct _security_video_label_t {
 } security_video_label_t;
 
 
+typedef struct _security_task_t {
+
+} security_task_t;
+
+typedef struct _security_task_control_t {
+
+} security_task_control_t;
+
+typedef struct _security_videoslice_t {
+
+} security_videoslice_t;
+
+typedef struct _security_videolabel_all_content_t {
+
+} security_videolabel_all_content_t;
+
+
+typedef struct _attr_condition {
+    std::string key;
+    std::string value;
+} attr_condition_t;
+
+typedef std::vector<attr_condition_t> attr_conditions_t;
 
 
 /**

@@ -7,7 +7,7 @@
 #ifndef __SECURITY_VIAS_SERVICE_H_
 #define __SECURITY_VIAS_SERVICE_H_
 
-
+#include "security_message_factory.h"
 
 /**
  * @Class    security_vias_service
@@ -54,8 +54,6 @@ public:
     
 
 private:
-    const char* port2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}
-    std::string makeRegisterMessage(const char* deviceId);
 };
 
 

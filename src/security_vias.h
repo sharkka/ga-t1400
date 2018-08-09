@@ -7,7 +7,7 @@
 #ifndef __SECURITY_VIAS_H_
 #define __SECURITY_VIAS_H_
 
-
+#include "security_message_factory.h"
 
 /**
  * @Class    security_vias
@@ -18,44 +18,46 @@
  */
 class security_vias {
 public:
-    int    sys_register();
-    int    sys_unregister();
-    int    sys_keepalive();
-    int    sys_sync_time();
-    int    add_tasks();
-    int    query_task();
-    int    update_task();
-    int    delete_task();
-    int    add_task_controls();
+    int    sys_register(const char* ip, int port, const char* deviceId);
+    int    sys_unregister(const char* ip, int port, const char* deviceId);
+    int    sys_keepalive(const char* ip, int port, const char* deviceId);
+    int    sys_synctime(const char* ip, int port);
+
+    int    add_tasks(const char* ip, int port, std::vector<security_task_t>& taskList);
+    int    query_task(const char* ip, int port, attr_conditions_t& conditions);
+    int    update_task(const char* ip, int port, std::vector<security_task_t>& taskList);
+    int    delete_task(const char* ip, int port, std::vector<std::string>& idList, std::string values);
+    int    add_task_controls(const char* ip, int port, std::vector<security_task_control_t>& taskControlList);
     int    task_start();
     int    task_pause();
     int    task_stop();
-    int    task_statuses();
-    int    add_videoslices(int taskid);
-    int    query_videoslices(int taskid);
-    int    add_videoslices_file(int taskid, int vsid);
-    int    query_videoslices_file(int taskid, int vsid);
-    int    delete_videoslices_file(int taskid, int vsid);
-    int    add_images(int taskid);
-    int    query_images(int taskid);
-    int    add_images_data(int taskid);
-    int    query_images_data(int taskid);
-    int    delete_images_data(int taskid);
-    int    add_video_labels(int taskid);
-    int    query_video_labels(int taskid);
-    int    add_analysis_rules();
-    int    query_analysis_rules();
-    int    update_analysis_rules();
-    int    delete_analysis_rules();
+    int    task_statuses(const char* ip, int port, const char* key, const char* value);
+    int    add_videoslices(const char* ip, int port, std::vector<security_videoslice_t>& videoSliceList);
+    int    query_videoslices(const char* ip, int port, attr_conditions_t& conditions);
+    int    add_videoslices_data(const char* ip, int port, const char* taskid, const char* vsid, const char* buff);
+    int    query_videoslices_data(const char* ip, int port, const char* taskid, const char* vsid, char** buff);
+    int    delete_videoslices_data(const char* ip, int port, const char* taskid, const char* vsid);
+    int    add_images(const char* ip, int port, const char* taskid, std::vector<security_image_t>& imageList);
+    int    query_images(const char* ip, int port, const char* taskid, attr_conditions_t& conditions);
+    int    add_images_data(const char* ip, int port, const char* taskid, const char* imageid, const char* buff);
+    int    query_images_data(const char* ip, int port, const char* taskid, const char* imageid, const char** buff);
+    int    delete_images_data(const char* ip, int port, const char* taskid, const char* imageid);
+    int    add_video_labels(const char* ip, int port, const char* taskid, std::vector<security_videolabel_all_content_t>& allContents);
+    int    query_video_labels(const char* ip, int port, const char* taskid, attr_conditions_t& conditions);
+    int    add_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRules);
+    int    query_analysis_rules(const char* ip, int port, attr_conditions_t& conditions);
+    int    update_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRules);
+    int    delete_analysis_rules(const char* ip, int port, std::vector<std::string>& idList, std::string values);
 
-    int    sys_query_capability_analysis_capability();
-    int    sys_query_capability_enhancement_and_restoration_capability();
-    int    sys_query_retrieval_capability();
+    int    sys_query_analysis_capability(const char* ip, int port);
+    int    sys_query_enhancement_and_restoration_capability(const char* ip, int port);
+    int    sys_query_retrieval_capability(const char* ip, int port);
     
 
 private:
-    const char* port2String(int port) {char buff[8]={0}; sprintf(buff, "%d", port); return buff;}
-    std::string makeRegisterMessage(const char* deviceId);
+    const char* num2String(int port) {static char buff[32]={0}; sprintf(buff, "%d", port); return buff;}
+    std::string queryCondition(const char* key, const char* value);
+    std::string addressPrefix(const char* ip, int port);
 };
 
 
