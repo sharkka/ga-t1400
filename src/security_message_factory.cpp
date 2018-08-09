@@ -167,7 +167,7 @@ std::string security_message_factory::makeVideoSliceInfoListMessage() {
  * @param    maxOccurs [description]
  * @return   [description]
  */
-std::string security_message_factory::makeImageListMessage(std::vector<security_image_t>& imageList) {
+std::string security_message_factory::makeImageListMessage(security_images_t& imageList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "ImageList");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -278,7 +278,7 @@ std::string security_message_factory::makeFileObjectMessage(const security_file_
  * @param    fo [description]
  * @return   [description]
  */
-std::string security_message_factory::makeFileListMessage(std::vector<security_file_t>& fileList) {
+std::string security_message_factory::makeFileListMessage(security_files_t& fileList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "Fileist");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -321,7 +321,7 @@ std::string security_message_factory::makeFileInfoMessage(const security_file_in
  * @param    personList [description]
  * @return   [description]
  */
-std::string security_message_factory::makePersonListMessage(std::vector<security_person_t>& personList) {
+std::string security_message_factory::makePersonListMessage(security_persons_t& personList) {
     simple_xml sx;
     sx.createRoot("complexType", "name", "PersonList");
     XMLNodeHandle node = sx.createNode("sequence");
@@ -363,7 +363,7 @@ std::string security_message_factory::makePersonObjectMessage(const security_per
     return sxml;
 }
 
-std::string security_message_factory::makeFaceListMessage(std::vector<security_face_t>& faceList) {
+std::string security_message_factory::makeFaceListMessage(security_faces_t& faceList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -371,7 +371,7 @@ std::string security_message_factory::makeFaceMessage(const security_face_t* fac
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList) {
+std::string security_message_factory::makeMotorVehicleListMessage(security_motorvehicles_t& motorVehicleList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -379,7 +379,7 @@ std::string security_message_factory::makeMotorVehicleMessage(const security_mot
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeNonMotorVehicleListMessage(std::vector<security_nonmotorvehicle_t>& motorVehicleList) {
+std::string security_message_factory::makeNonMotorVehicleListMessage(security_nonmotorvehicles_t& motorVehicleList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -387,7 +387,7 @@ std::string security_message_factory::makeNonMotorVehicleMessage(const security_
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeThingListMessage(std::vector<security_thing_t>& thingList) {
+std::string security_message_factory::makeThingListMessage(security_things_t& thingList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -395,7 +395,7 @@ std::string security_message_factory::makeThingMessage(const security_thing_t* t
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeSceneListMessage(std::vector<security_scene_t>& sceneList) {
+std::string security_message_factory::makeSceneListMessage(security_scenes_t& sceneList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -403,7 +403,7 @@ std::string security_message_factory::makeSceneMessage(const security_scene_t* s
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeCaseListMessage(std::vector<security_case_t>& caseList) {
+std::string security_message_factory::makeCaseListMessage(security_cases_t& caseList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -418,25 +418,25 @@ std::string security_message_factory::makeCaseInfoMessage(const security_caseinf
 std::string security_message_factory::makeDispositionMessage(const security_disposition_t* disp) {
     return SECURITY_STRING_EMPTY;
 }
-std::string security_message_factory::makeDispositionListMessage(std::vector<security_disposition_t>& dispList) {
+std::string security_message_factory::makeDispositionListMessage(security_dispositions_t& dispList) {
 	return SECURITY_STRING_EMPTY;
 }
 
 std::string security_message_factory::makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti) {
     return SECURITY_STRING_EMPTY;
 }
-std::string security_message_factory::makeDispositionNotifyListMessage(std::vector<security_disposition_notify_t>& dispNotifyList) {
+std::string security_message_factory::makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList) {
 	return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeSubscribeListMessage(std::vector<security_subscribe_t>& subscribeList) {
+std::string security_message_factory::makeSubscribeListMessage(security_subscribes_t& subscribeList) {
     return SECURITY_STRING_EMPTY;
 }
-std::string security_message_factory::makeSubscribeNotifyListMessage(std::vector<security_subscribe_notify_t>& subscribeNotifyList) {
+std::string security_message_factory::makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList) {
 	return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeAnalysisRuleListMessage(std::vector<security_analysis_rule_t>& analysisRuleList) {
+std::string security_message_factory::makeAnalysisRuleListMessage(security_analysis_rules_t& analysisRuleList) {
     return SECURITY_STRING_EMPTY;
 }
 
@@ -444,7 +444,7 @@ std::string security_message_factory::makeAnalysisRuleMessage(const security_ana
     return SECURITY_STRING_EMPTY;
 }
 
-std::string security_message_factory::makeVideoLabelListMessage(std::vector<security_videolabel_t>& videoLabelList) {
+std::string security_message_factory::makeVideoLabelListMessage(security_videolabels_t& videoLabelList) {
     return SECURITY_STRING_EMPTY;
 }
 

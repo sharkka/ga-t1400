@@ -679,7 +679,7 @@ int security_viid::query_images(const char* ip, int port, const char* key, const
  * @param    deviceId [description]
  * @return   [description]
  */
-int security_viid::add_images(const char* ip, int port, std::vector<security_image_t>& imageList) {
+int security_viid::add_images(const char* ip, int port, security_images_t& imageList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1079,7 +1079,7 @@ int security_viid::query_files(const char* ip, int port, const char* key, const 
  * @param    imgObj [description]
  * @return   [description]
  */
-int security_viid::update_files(const char* ip, int port, std::vector<security_image_t>& imgList) {
+int security_viid::update_files(const char* ip, int port, security_images_t& imgList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1491,7 +1491,7 @@ int security_viid::query_persons(const char* ip, int port, const char* key, cons
  * @param    port [description]
  * @return   [description]
  */
-int security_viid::add_persons(const char* ip, int port, std::vector<security_person_t>& personList) {
+int security_viid::add_persons(const char* ip, int port, security_persons_t& personList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1524,7 +1524,7 @@ int security_viid::add_persons(const char* ip, int port, std::vector<security_pe
  * @param    personList [description]
  * @return   [description]
  */
-int security_viid::update_persons(const char* ip, int port, std::vector<security_person_t>& personList) {
+int security_viid::update_persons(const char* ip, int port, security_persons_t& personList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1558,7 +1558,7 @@ int security_viid::update_persons(const char* ip, int port, std::vector<security
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_persons(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_persons(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1739,7 +1739,7 @@ int security_viid::query_faces(const char* ip, int port, const char* key, const 
  * @param    port [description]
  * @return   [description]
  */
-int security_viid::update_faces(const char* ip, int port, std::vector<security_face_t>& faceList) {
+int security_viid::update_faces(const char* ip, int port, security_faces_t& faceList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1773,7 +1773,7 @@ int security_viid::update_faces(const char* ip, int port, std::vector<security_f
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_faces(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_faces(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1951,7 +1951,7 @@ int security_viid::query_motorvehicles(const char* ip, int port, const char* key
  * @param    faceList [description]
  * @return   [description]
  */
-int security_viid::add_motorvehicles(const char* ip, int port, std::vector<security_motorvehicle_t>& motorvehicleList) {
+int security_viid::add_motorvehicles(const char* ip, int port, security_motorvehicles_t& motorvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -1984,7 +1984,7 @@ int security_viid::add_motorvehicles(const char* ip, int port, std::vector<secur
  * @param    faceList [description]
  * @return   [description]
  */
-int security_viid::update_motorvehicles(const char* ip, int port, std::vector<security_motorvehicle_t>& vehicleList) {
+int security_viid::update_motorvehicles(const char* ip, int port, security_motorvehicles_t& vehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2018,7 +2018,7 @@ int security_viid::update_motorvehicles(const char* ip, int port, std::vector<se
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_motorvehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_motorvehicles(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2201,7 +2201,7 @@ int security_viid::query_nonmotorvehicles(const char* ip, int port, const char* 
  * @param    nvehicleList [description]
  * @return   [description]
  */
-int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_t>& nvehicleList) {
+int security_viid::add_nonmotorvehicles(const char* ip, int port, security_nonmotorvehicles_t& nvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2234,7 +2234,7 @@ int security_viid::add_nonmotorvehicles(const char* ip, int port, std::vector<se
  * @param    nvehicleList [description]
  * @return   [description]
  */
-int security_viid::update_nonmotorvehicles(const char* ip, int port, std::vector<security_nonmotorvehicle_t>& nonvehicleList) {
+int security_viid::update_nonmotorvehicles(const char* ip, int port, security_nonmotorvehicles_t& nonvehicleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2268,7 +2268,7 @@ int security_viid::update_nonmotorvehicles(const char* ip, int port, std::vector
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_nonmotorvehicles(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_nonmotorvehicles(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2451,7 +2451,7 @@ int security_viid::query_things(const char* ip, int port, const char* key, const
  * @param    thingList [description]
  * @return   [description]
  */
-int security_viid::add_things(const char* ip, int port, std::vector<security_thing_t>& thingList) {
+int security_viid::add_things(const char* ip, int port, security_things_t& thingList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2484,7 +2484,7 @@ int security_viid::add_things(const char* ip, int port, std::vector<security_thi
  * @param    thingList [description]
  * @return   [description]
  */
-int security_viid::update_things(const char* ip, int port, std::vector<security_thing_t>& thingList) {
+int security_viid::update_things(const char* ip, int port, security_things_t& thingList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2518,7 +2518,7 @@ int security_viid::update_things(const char* ip, int port, std::vector<security_
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_things(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_things(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2701,7 +2701,7 @@ int security_viid::query_scenes(const char* ip, int port, const char* key, const
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::add_scenes(const char* ip, int port, std::vector<security_scene_t>& sceneList) {
+int security_viid::add_scenes(const char* ip, int port, security_scenes_t& sceneList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2734,7 +2734,7 @@ int security_viid::add_scenes(const char* ip, int port, std::vector<security_sce
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::update_scenes(const char* ip, int port, std::vector<security_scene_t>& sceneList) {
+int security_viid::update_scenes(const char* ip, int port, security_scenes_t& sceneList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2768,7 +2768,7 @@ int security_viid::update_scenes(const char* ip, int port, std::vector<security_
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_scenes(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_scenes(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -2951,7 +2951,7 @@ int security_viid::query_cases(const char* ip, int port, const char* key, const 
  * @param    sceneList [description]
  * @return   [description]
  */
-int security_viid::add_cases(const char* ip, int port, std::vector<security_case_t>& caseList) {
+int security_viid::add_cases(const char* ip, int port, security_cases_t& caseList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3213,7 +3213,7 @@ int security_viid::delete_caseinfo(const char* ip, int port, const char* id) {
  * @param    dispList [description]
  * @return   [description]
  */
-int security_viid::dispositions(const char* ip, int port, std::vector<security_disposition_t>& dispList) {
+int security_viid::dispositions(const char* ip, int port, security_dispositions_t& dispList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3317,7 +3317,7 @@ int security_viid::update_disposition(const char* ip, int port, security_disposi
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_disposition(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_disposition(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3383,7 +3383,7 @@ int security_viid::undispositions(const char* ip, int port, const char* id) {
  * @param    dispnotiList [description]
  * @return   [description]
  */
-int security_viid::disposition_notifications(const char* ip, int port, std::vector<security_disposition_notify_t>& dispnotiList) {
+int security_viid::disposition_notifications(const char* ip, int port, security_disposition_notifys_t& dispnotiList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3454,7 +3454,7 @@ int security_viid::query_disposition_notification(const char* ip, int port, cons
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_disposition_notification(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_disposition_notification(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3487,7 +3487,7 @@ int security_viid::delete_disposition_notification(const char* ip, int port, std
  * @param    subscribeList [description]
  * @return   [description]
  */
-int security_viid::subscribes(const char* ip, int port, std::vector<security_subscribe_t>& subscribeList) {
+int security_viid::subscribes(const char* ip, int port, security_subscribes_t& subscribeList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3558,7 +3558,7 @@ int security_viid::query_subscribes(const char* ip, int port, const char* key, c
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_subscribes(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_subscribes(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3624,7 +3624,7 @@ int security_viid::unsubscribes(const char* ip, int port, const char* id) {
  * @param    subscribenotiList [description]
  * @return   [description]
  */
-int security_viid::subscribe_notifications(const char* ip, int port, std::vector<security_subscribe_notify_t>& subscribenotiList) {
+int security_viid::subscribe_notifications(const char* ip, int port, security_subscribe_notifys_t& subscribenotiList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3695,7 +3695,7 @@ int security_viid::query_subscribe_notifications(const char* ip, int port, const
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_subscribe_notifications(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_subscribe_notifications(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3764,7 +3764,7 @@ int security_viid::query_analysis_rules(const char* ip, int port, const char* ke
  * @param    analysisRuleList [description]
  * @return   [description]
  */
-int security_viid::add_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+int security_viid::add_analysis_rules(const char* ip, int port, security_analysis_rules_t& analysisRuleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3796,7 +3796,7 @@ int security_viid::add_analysis_rules(const char* ip, int port, std::vector<secu
  * @param    analysisRuleList [description]
  * @return   [description]
  */
-int security_viid::update_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRuleList) {
+int security_viid::update_analysis_rules(const char* ip, int port, security_analysis_rules_t& analysisRuleList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -3830,7 +3830,7 @@ int security_viid::update_analysis_rules(const char* ip, int port, std::vector<s
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_analysis_rules(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_analysis_rules(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -4045,7 +4045,7 @@ int security_viid::query_video_labels(const char* ip, int port, const char* key,
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::add_video_labels(const char* ip, int port, std::vector<security_videolabel_t>& videoLabelList) {
+int security_viid::add_video_labels(const char* ip, int port, security_videolabels_t& videoLabelList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -4078,7 +4078,7 @@ int security_viid::add_video_labels(const char* ip, int port, std::vector<securi
  * @param    videoLabel [description]
  * @return   [description]
  */
-int security_viid::update_video_labels(const char* ip, int port, std::vector<security_videolabel_t>& videoLabelList) {
+int security_viid::update_video_labels(const char* ip, int port, security_videolabels_t& videoLabelList) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
@@ -4112,7 +4112,7 @@ int security_viid::update_video_labels(const char* ip, int port, std::vector<sec
  * @param    values [description]
  * @return   [description]
  */
-int security_viid::delete_video_labels(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_viid::delete_video_labels(const char* ip, int port, security_idlist_t& idList, std::string values) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");

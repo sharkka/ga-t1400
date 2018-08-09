@@ -157,7 +157,7 @@ int security_vias::sys_synctime(const char* ip, int port) {
     return 0;
 }
 
-int security_vias::add_tasks(const char* ip, int port, std::vector<security_task_t>& taskList) {
+int security_vias::add_tasks(const char* ip, int port, security_tasks_t& taskList) {
     return 0;
 }
 
@@ -165,15 +165,15 @@ int security_vias::query_task(const char* ip, int port, attr_conditions_t& condi
     return 0;
 }
 
-int security_vias::update_task(const char* ip, int port, std::vector<security_task_t>& taskList) {
+int security_vias::update_task(const char* ip, int port, security_tasks_t& taskList) {
     return 0;
 }
 
-int security_vias::delete_task(const char* ip, int port, std::vector<std::string>& idList, std::string values) {
+int security_vias::delete_task(const char* ip, int port, security_idlist_t& idList, std::string values) {
     return 0;
 }
 
-int security_vias::add_task_controls(const char* ip, int port, std::vector<security_task_control_t>& taskControlList) {
+int security_vias::add_task_controls(const char* ip, int port, security_task_controls_t& taskControlList) {
     return 0;
 }
 
@@ -181,7 +181,7 @@ int security_vias::task_statuses(const char* ip, int port, const char* key, cons
     return 0;
 }
 
-int security_vias::add_videoslices(const char* ip, int port, std::vector<security_videoslice_t>& videoSliceList) {
+int security_vias::add_videoslices(const char* ip, int port, security_videoslices_t& videoSliceList) {
     return 0;
 }
 
@@ -201,7 +201,7 @@ int security_vias::delete_videoslices_data(const char* ip, int port, const char*
     return 0;
 }
 
-int security_vias::add_images(const char* ip, int port, const char* taskid, std::vector<security_image_t>& imageList) {
+int security_vias::add_images(const char* ip, int port, const char* taskid, security_images_t& imageList) {
     return 0;
 }
 
@@ -221,7 +221,7 @@ int security_vias::delete_images_data(const char* ip, int port, const char* task
     return 0;
 }
 
-int security_vias::add_video_labels(const char* ip, int port, const char* taskid, std::vector<security_videolabel_all_content_t>& allContents) {
+int security_vias::add_video_labels(const char* ip, int port, const char* taskid, security_videolabel_all_contents_t& allContents) {
     return 0;
 }
 
@@ -229,7 +229,7 @@ int security_vias::query_video_labels(const char* ip, int port, const char* task
     return 0;
 }
 
-int security_vias::add_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRules) {
+int security_vias::add_analysis_rules(const char* ip, int port, security_analysis_rules_t& analysisRules) {
     return 0;
 }
 
@@ -237,7 +237,7 @@ int security_vias::query_analysis_rules(const char* ip, int port, attr_condition
     return 0;
 }
 
-int security_vias::update_analysis_rules(const char* ip, int port, std::vector<security_analysis_rule_t>& analysisRules) {
+int security_vias::update_analysis_rules(const char* ip, int port, security_analysis_rules_t& analysisRules) {
     return 0;
 }
 

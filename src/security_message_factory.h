@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+#define SecurityArray std::vector
+
 /**
  * @Struct   security_image_info_t
  * @Brief
@@ -258,11 +260,6 @@ typedef struct _security_subscribe_notify_t {
 
 } security_subscribe_notify_t;
 
-typedef struct _security_video_label_t {
-
-} security_video_label_t;
-
-
 typedef struct _security_task_t {
 
 } security_task_t;
@@ -285,8 +282,30 @@ typedef struct _attr_condition {
     std::string value;
 } attr_condition_t;
 
-typedef std::vector<attr_condition_t> attr_conditions_t;
-
+typedef SecurityArray<attr_condition_t>                     attr_conditions_t;
+typedef SecurityArray<security_image_info_t>                security_image_infos_t;
+typedef SecurityArray<security_image_t>                     security_images_t;
+typedef SecurityArray<security_file_t>                      security_files_t;
+typedef SecurityArray<security_file_info_t>                 security_file_infos_t;
+typedef SecurityArray<security_person_t>                    security_persons_t;
+typedef SecurityArray<security_face_t>                      security_faces_t;
+typedef SecurityArray<security_motorvehicle_t>              security_motorvehicles_t;
+typedef SecurityArray<security_nonmotorvehicle_t>           security_nonmotorvehicles_t;
+typedef SecurityArray<security_thing_t>                     security_things_t;
+typedef SecurityArray<security_scene_t>                     security_scenes_t;
+typedef SecurityArray<security_case_t>                      security_cases_t;
+typedef SecurityArray<security_caseinfo_t>                  security_caseinfos_t;
+typedef SecurityArray<security_disposition_t>               security_dispositions_t;
+typedef SecurityArray<security_disposition_notify_t>        security_disposition_notifys_t;
+typedef SecurityArray<security_analysis_rule_t>             security_analysis_rules_t;
+typedef SecurityArray<security_videolabel_t>                security_videolabels_t;
+typedef SecurityArray<security_subscribe_t>                 security_subscribes_t;
+typedef SecurityArray<security_subscribe_notify_t>          security_subscribe_notifys_t;
+typedef SecurityArray<security_task_t>                      security_tasks_t;
+typedef SecurityArray<security_task_control_t>              security_task_controls_t;
+typedef SecurityArray<security_videoslice_t>                security_videoslices_t;
+typedef SecurityArray<security_videolabel_all_content_t>    security_videolabel_all_contents_t;
+typedef std::vector<std::string>                            security_idlist_t;
 
 /**
  * @Class    security_message_factory
@@ -303,36 +322,36 @@ public:
     static std::string makeAPEListMessage();
     static std::string makeVideoSliceListMessage();
     static std::string makeVideoSliceInfoListMessage();
-    static std::string makeImageListMessage(std::vector<security_image_t>& imageList);
+    static std::string makeImageListMessage(security_images_t& imageList);
     static std::string makeImageObjectMessage(const security_image_t* imgObject);
     static std::string makeImageInfoMessage(const security_image_info_t* imageInfo);
-    static std::string makeFileListMessage(std::vector<security_file_t>& fileList);
+    static std::string makeFileListMessage(security_files_t& fileList);
     static std::string makeFileObjectMessage(const security_file_t* fileObject);
     static std::string makeFileInfoMessage(const security_file_info_t* fileInfo);
-    static std::string makePersonListMessage(std::vector<security_person_t>& personList);
+    static std::string makePersonListMessage(security_persons_t& personList);
     static std::string makePersonObjectMessage(const security_person_t* personObject);
-    static std::string makeFaceListMessage(std::vector<security_face_t>& faceList);
+    static std::string makeFaceListMessage(security_faces_t& faceList);
     static std::string makeFaceMessage(const security_face_t* faceObject);
-    static std::string makeMotorVehicleListMessage(std::vector<security_motorvehicle_t>& motorVehicleList);
+    static std::string makeMotorVehicleListMessage(security_motorvehicles_t& motorVehicleList);
     static std::string makeMotorVehicleMessage(const security_motorvehicle_t* motorVehicle);
-    static std::string makeNonMotorVehicleListMessage(std::vector<security_nonmotorvehicle_t>& nonmotorVehicleList);
+    static std::string makeNonMotorVehicleListMessage(security_nonmotorvehicles_t& nonmotorVehicleList);
     static std::string makeNonMotorVehicleMessage(const security_nonmotorvehicle_t* nonmotorVehicle);
-    static std::string makeThingListMessage(std::vector<security_thing_t>& thingList);
+    static std::string makeThingListMessage(security_things_t& thingList);
     static std::string makeThingMessage(const security_thing_t* thingObject);
-    static std::string makeSceneListMessage(std::vector<security_scene_t>& sceneList);
+    static std::string makeSceneListMessage(security_scenes_t& sceneList);
     static std::string makeSceneMessage(const security_scene_t* scemeObject);
-    static std::string makeCaseListMessage(std::vector<security_case_t>& caseList);
+    static std::string makeCaseListMessage(security_cases_t& caseList);
     static std::string makeCaseMessage(const security_case_t* caseObject);
     static std::string makeCaseInfoMessage(const security_caseinfo_t* caseInfo);
     static std::string makeDispositionMessage(const security_disposition_t* disp);
-	static std::string makeDispositionListMessage(std::vector<security_disposition_t>& dispList);
+	static std::string makeDispositionListMessage(security_dispositions_t& dispList);
     static std::string makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti);
-	static std::string makeDispositionNotifyListMessage(std::vector<security_disposition_notify_t>& dispNotifyList);
-    static std::string makeSubscribeListMessage(std::vector<security_subscribe_t>& subscribeList);
-	static std::string makeSubscribeNotifyListMessage(std::vector<security_subscribe_notify_t>& subscribeNotifyList);
-    static std::string makeAnalysisRuleListMessage(std::vector<security_analysis_rule_t>& analysisRuleList);
+	static std::string makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList);
+    static std::string makeSubscribeListMessage(security_subscribes_t& subscribeList);
+	static std::string makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList);
+    static std::string makeAnalysisRuleListMessage(security_analysis_rules_t& analysisRuleList);
     static std::string makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule);
-    static std::string makeVideoLabelListMessage(std::vector<security_videolabel_t>& videoLabelList);
+    static std::string makeVideoLabelListMessage(security_videolabels_t& videoLabelList);
     static std::string makeVideoLabelMessage(const security_videolabel_t* videoLabel);
 
 private:
