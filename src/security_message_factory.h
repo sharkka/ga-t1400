@@ -276,6 +276,13 @@ typedef struct _security_videolabel_all_content_t {
 
 } security_videolabel_all_content_t;
 
+typedef struct _security_system_time_t {
+	std::string viidServerId;
+	std::string timeMode;
+	std::string localTime;
+	std::string timeZone;
+} security_system_time_t;
+
 
 typedef struct _attr_condition {
     std::string key;
@@ -319,7 +326,7 @@ public:
     static std::string makeRegisterMessage(const char* deviceId);
     static std::string makeUnregisterMessage(const char* deviceId);
     static std::string makeKeepaliveMessage(const char* deviceId);
-    static std::string makeTimeMessage(const char* serverId);
+    static std::string makeTimeMessage(const security_system_time_t* sysTime);
     static std::string makeAPEListMessage();
     static std::string makeVideoSliceListMessage();
     static std::string makeVideoSliceInfoListMessage();
