@@ -305,7 +305,7 @@ typedef SecurityArray<security_task_t>                      security_tasks_t;
 typedef SecurityArray<security_task_control_t>              security_task_controls_t;
 typedef SecurityArray<security_videoslice_t>                security_videoslices_t;
 typedef SecurityArray<security_videolabel_all_content_t>    security_videolabel_all_contents_t;
-typedef std::vector<std::string>                            security_idlist_t;
+typedef SecurityArray<std::string>                          security_idlist_t;
 
 /**
  * @Class    security_message_factory
@@ -319,6 +319,7 @@ public:
     static std::string makeRegisterMessage(const char* deviceId);
     static std::string makeUnregisterMessage(const char* deviceId);
     static std::string makeKeepaliveMessage(const char* deviceId);
+    static std::string makeTimeMessage(const char* serverId);
     static std::string makeAPEListMessage();
     static std::string makeVideoSliceListMessage();
     static std::string makeVideoSliceInfoListMessage();

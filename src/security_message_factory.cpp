@@ -22,6 +22,9 @@ std::string security_message_factory::makeRegisterMessage(const char* deviceId) 
     sx.createRoot("complexType", "name", "Register");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
+	if (!node1) {
+		return SECURITY_STRING_EMPTY;
+	}
     sx.addProperity(node1, "name", deviceId);
     sx.addProperity(node1, "type", "DeviceIdType");
     sx.addProperity(node1, "use", "required");
@@ -43,6 +46,9 @@ std::string security_message_factory::makeUnregisterMessage(const char* deviceId
     sx.createRoot("complexType", "name", "UnRegister");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
+	if (!node1) {
+		return SECURITY_STRING_EMPTY;
+	}
     sx.addProperity(node1, "name", deviceId);
     sx.addProperity(node1, "type", "DeviceIdType");
     sx.addProperity(node1, "use", "required");
@@ -64,11 +70,54 @@ std::string security_message_factory::makeKeepaliveMessage(const char* deviceId)
     sx.createRoot("complexType", "name", "Keepalive");
     XMLNodeHandle node = sx.createNode("sequence");
     XMLNodeHandle node1 = sx.createChild(node, "element");
+	if (!node1) {
+		return SECURITY_STRING_EMPTY;
+	}
     sx.addProperity(node1, "name", deviceId);
     sx.addProperity(node1, "type", "DeviceIdType");
     sx.addProperity(node1, "use", "required");
     std::string sxml = sx.buildDoc(node);
     printf("%s\n", sxml.c_str());
+    return sxml;
+}
+
+std::string security_message_factory::makeTimeMessage(const char* serverId) {
+    simple_xml sx;
+    sx.createRoot("complexType", "name", "SysteimTime");
+    XMLNodeHandle node = sx.createNode("sequence");
+    XMLNodeHandle node1 = sx.createChild(node, "element");
+	if (!node1) {
+		return SECURITY_STRING_EMPTY;
+	}
+    sx.addProperity(node1, "name", "VIIDServerID");
+    sx.addProperity(node1, "type", "DeviceIdType");
+	sx.setContent(node1, serverId);
+
+    XMLNodeHandle node2 = sx.createChild(node, "element");
+	if (!node2) {
+		return SECURITY_STRING_EMPTY;
+	}
+    sx.addProperity(node2, "name", "TimeMode");
+    sx.addProperity(node2, "type", "TimeCorrectModeType");
+
+    XMLNodeHandle node3 = sx.createChild(node, "element");
+	if (!node3) {
+		return SECURITY_STRING_EMPTY;
+	}
+    sx.addProperity(node3, "name", "LocalTime");
+    sx.addProperity(node3, "type", "datetime");
+
+    XMLNodeHandle node4 = sx.createChild(node, "element");
+	if (!node4) {
+		return SECURITY_STRING_EMPTY;
+	}
+    sx.addProperity(node4, "name", "TimeZone");
+    sx.addProperity(node4, "type", "string");
+    
+    std::string sxml = sx.buildDoc(node);
+
+    printf("%s\n", sxml.c_str());
+
     return sxml;
 }
 /**
