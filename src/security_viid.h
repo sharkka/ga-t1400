@@ -31,9 +31,9 @@ public:
     int    query_tollgates(const char* ip, int port, const char* key, const char* value);
     int    query_lanes(const char* ip, int port, const char* key, const char* value);
     int    query_video_slices(const char* ip, int port, const char* key, const char* value);
-    int    add_video_slices(const char* ip, int port, const char* deviceId);
+    int    add_video_slices(const char* ip, int port, const security_videoslice_t* videoSlice);
     int    query_video_slice(const char* ip, int port, const char* id);
-    int    update_video_slice(const char* ip, int port, const char* id, const char* deviceId);
+    int    update_video_slice(const char* ip, int port, const char* id, const security_videoslice_t* videoSlice);
     int    delete_video_slice(const char* ip, int port, const char* id);
     int    query_videodata(const char* ip, int port, const char* id);
     int    add_videodata(const char* ip, int port, const char* id, const char* buff);

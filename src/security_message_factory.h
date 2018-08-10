@@ -10,7 +10,8 @@
 #include <string>
 #include <vector>
 
-#define SecurityArray std::vector
+#define SecurityArray  std::vector
+#define SecurityString std::string
 
 /**
  * @Struct   security_image_info_t
@@ -20,47 +21,60 @@
  * @Author   Anyz
  */
 typedef struct _security_image_info {
-    std::string imageId;
-    std::string infoKind;
-    std::string imageSource;
-    std::string sourceVideoId;
-    std::string originImageId;
-    std::string eventSort;
-    std::string deviceId;
-    std::string storagePath;
-    std::string fileHash;
-    std::string shotTime;
-    std::string title;
-    std::string titleNote;
-    std::string specialName;
-    std::string keyword;
-    std::string contentDescription;
-    std::string subjectCharacter;
-    std::string shotPlaceFullAddress;
+    SecurityString imageId;
+    SecurityString infoKind;
+    SecurityString imageSource;
+    SecurityString sourceVideoId;
+    SecurityString originImageId;
+    SecurityString eventSort;
+    SecurityString deviceId;
+    SecurityString storagePath;
+    SecurityString fileHash;
+    SecurityString shotTime;
+    SecurityString title;
+    SecurityString titleNote;
+    SecurityString specialName;
+    SecurityString keyword;
+    SecurityString contentDescription;
+    SecurityString subjectCharacter;
+    SecurityString shotPlaceFullAddress;
     double      shotPlaceLongitude;
     double      shotPlaceLatitude;
-    std::string HorizontalShotDirection;
-    std::string VerticalShotDirection;
-    std::string securityLevel;
+    SecurityString HorizontalShotDirection;
+    SecurityString VerticalShotDirection;
+    SecurityString securityLevel;
     int         width;
     int         height;
-    std::string cameraManufacturer;
-    std::string cameraVersion;
+    SecurityString cameraManufacturer;
+    SecurityString cameraVersion;
     int         apertureValue;
     int         isoSensitivity;
     int         focalLength;
-    std::string qualityGrade;
-    std::string collectorName;
-    std::string collectorOrg;
-    std::string collectorIdType;
-    std::string collectorId;
-    std::string entryClrk;
-    std::string entryClrkOrg;
-    std::string entryClrkIdType;
-    std::string entryTime;
-    std::string imageProcFlag;
+    SecurityString qualityGrade;
+    SecurityString collectorName;
+    SecurityString collectorOrg;
+    SecurityString collectorIdType;
+    SecurityString collectorId;
+    SecurityString entryClrk;
+    SecurityString entryClrkOrg;
+    SecurityString entryClrkIdType;
+    SecurityString entryTime;
+    SecurityString imageProcFlag;
     int         fileSize;
 } security_image_info_t;
+
+typedef struct _security_subimage_info_t {
+    int             imageId;
+    int             eventSort;
+    SecurityString  deviceId;
+    SecurityString  storagePath;
+    SecurityString  type;
+    SecurityString  fileFormat;
+    SecurityString  shotTime;
+    int             width;
+    int             height;
+    void*           data;
+} security_subimage_info_t;
 
 typedef struct _security_image_t {
 
@@ -73,18 +87,18 @@ typedef struct _security_image_t {
  * @Author   Anyz
  */
 typedef struct _security_file {
-    std::string fileId;
-    std::string infoKind;
-    std::string source;
-    std::string filenName;
-    std::string storagePath;
-    std::string fileHash;
-    std::string fileFormat;
-    std::string title;
-    std::string securityLevel;
-    std::string submiterName;
-    std::string submiterOrg;
-    std::string entryTime;
+    SecurityString fileId;
+    SecurityString infoKind;
+    SecurityString source;
+    SecurityString filenName;
+    SecurityString storagePath;
+    SecurityString fileHash;
+    SecurityString fileFormat;
+    SecurityString title;
+    SecurityString securityLevel;
+    SecurityString submiterName;
+    SecurityString submiterOrg;
+    SecurityString entryTime;
     int         fileSize;
 } security_file_t;
 /**
@@ -95,18 +109,18 @@ typedef struct _security_file {
  * @Author   Anyz
  */
 typedef struct _security_file_info {
-    std::string fileId;
-    std::string infoKind;
-    std::string source;
-    std::string filenName;
-    std::string storagePath;
-    std::string fileHash;
-    std::string fileFormat;
-    std::string title;
-    std::string securityLevel;
-    std::string submiterName;
-    std::string submiterOrg;
-    std::string entryTime;
+    SecurityString fileId;
+    SecurityString infoKind;
+    SecurityString source;
+    SecurityString filenName;
+    SecurityString storagePath;
+    SecurityString fileHash;
+    SecurityString fileFormat;
+    SecurityString title;
+    SecurityString securityLevel;
+    SecurityString submiterName;
+    SecurityString submiterOrg;
+    SecurityString entryTime;
     int         fileSize;
 } security_file_info_t;
 /**
@@ -117,21 +131,21 @@ typedef struct _security_file_info {
  * @Author   Anyz
  */
 typedef struct _security_person_t {
-    std::string personId;
-    std::string infoKind;
-    std::string sourceId;
-    std::string deviceId;
+    SecurityString personId;
+    SecurityString infoKind;
+    SecurityString sourceId;
+    SecurityString deviceId;
     int leftTopX;
     int leftTopY;
     int rightBottomX;
     int rightBottomY;
-    std::string locationMarkTime;
-    std::string personAppearTime;
+    SecurityString locationMarkTime;
+    SecurityString personAppearTime;
     int id;
     int idNumber;
-    std::string name;
-    std::string usedName;
-    std::string alias;
+    SecurityString name;
+    SecurityString usedName;
+    SecurityString alias;
     int genderCode;
     int ageUpLimit;
     int ageLowerLimit;
@@ -140,66 +154,66 @@ typedef struct _security_person_t {
     int nativeCityCode;
     int residenceAdminDivision;
     int chineseAccentCode;
-    std::string personOrg;
-    std::string jobCategory;
+    SecurityString personOrg;
+    SecurityString jobCategory;
     int accompanyNumber;
     int heightUpLimit;
     int heightLowerLimit;
     int bodyType;
-    std::string skinColor;
-    std::string hairStyle;
-    std::string hairColor;
-    std::string gesture;
+    SecurityString skinColor;
+    SecurityString hairStyle;
+    SecurityString hairColor;
+    SecurityString gesture;
     int status;
-    std::string faceStyle;
-    std::string facialFeature;
-    std::string physicalFeature;
-    std::string bodyFeature;
-    std::string habitualMovement;
-    std::string behavior;
-    std::string behaviorDescription;
-    std::string appendant;
-    std::string appendantDescription;
-    std::string umbrellaColor;
-    std::string respiratorColor;
-    std::string capStyle;
-    std::string capColor;
-    std::string glassStyle;
-    std::string glassColor;
-    std::string scarfColor;
-    std::string bagStyle;
-    std::string bagColor;
-    std::string coatStyle;
-    std::string coatLength;
-    std::string coatColor;
-    std::string trousersStyle;
-    std::string trousersColor;
-    std::string trousersLen;
-    std::string shoesStyle;
-    std::string shoesColor;
+    SecurityString faceStyle;
+    SecurityString facialFeature;
+    SecurityString physicalFeature;
+    SecurityString bodyFeature;
+    SecurityString habitualMovement;
+    SecurityString behavior;
+    SecurityString behaviorDescription;
+    SecurityString appendant;
+    SecurityString appendantDescription;
+    SecurityString umbrellaColor;
+    SecurityString respiratorColor;
+    SecurityString capStyle;
+    SecurityString capColor;
+    SecurityString glassStyle;
+    SecurityString glassColor;
+    SecurityString scarfColor;
+    SecurityString bagStyle;
+    SecurityString bagColor;
+    SecurityString coatStyle;
+    SecurityString coatLength;
+    SecurityString coatColor;
+    SecurityString trousersStyle;
+    SecurityString trousersColor;
+    SecurityString trousersLen;
+    SecurityString shoesStyle;
+    SecurityString shoesColor;
     int         isDriver;
     int         isForeigner;
-    std::string passportType;
-    std::string immigrantTypeCode;
+    SecurityString passportType;
+    SecurityString immigrantTypeCode;
     int         isSuspectedTerrorist;
     int         suspectedTerroristNumber;
     int         isCriminalInvolved;
-    std::string criminalInvolvedSpecialisationCode;
-    std::string bodySpecialMark;
-    std::string crimeMethod;
-    std::string crimeCharacterCode;
+    SecurityString criminalInvolvedSpecialisationCode;
+    SecurityString bodySpecialMark;
+    SecurityString crimeMethod;
+    SecurityString crimeCharacterCode;
     int         escapedCriminalNumber;
     int         isDetainees;
-    std::string detentionHouseCode;
-    std::string detaineesIdentity;
-    std::string detaineesSpecialIdentity;
-    std::string memberTypeCode;
+    SecurityString detentionHouseCode;
+    SecurityString detaineesIdentity;
+    SecurityString detaineesSpecialIdentity;
+    SecurityString memberTypeCode;
     int         isVictim;
-    std::string victimType;
-    std::string injuredDegree;
-    std::string corpseConditionCode;
+    SecurityString victimType;
+    SecurityString injuredDegree;
+    SecurityString corpseConditionCode;
     int         isSuspiciousPerson;
-    std::string subImageList;
+    SecurityString subImageList;
 } security_person_t;
 /**
  * @Struct   security_face_object_t
@@ -209,7 +223,77 @@ typedef struct _security_person_t {
  * @Author   Anyz
  */
 typedef struct _security_face_t {
-
+    int            faceId;
+    SecurityString infoKind;
+    SecurityString sourceId;
+    SecurityString deviceId;
+    int            leftTopX;
+    int            leftTopY;
+    int            rightBottomX;
+    int            rightBottomY;
+    SecurityString locationMarkTime;
+    SecurityString faceAppearTime;
+    SecurityString faceDisAppearTime;
+    SecurityString idType;
+    SecurityString idNumber;
+    SecurityString name;
+    SecurityString usedName;
+    SecurityString alias;
+    SecurityString genderCode;
+    int            ageUpLimit;
+    int            ageLowerLimit;
+    SecurityString ethicCode;
+    SecurityString nationalityCode;
+    SecurityString nativeCityCode;
+    SecurityString residenceAdminDivision;
+    SecurityString chineseAccentCode;
+    SecurityString jobCategory;
+    SecurityString accompanyNumber;
+    SecurityString skinColor;
+    SecurityString hairStyle;
+    SecurityString hairColor;
+    SecurityString faceStyle;
+    SecurityString facialFeature;
+    SecurityString physicalFeature;
+    SecurityString respiratorColor;
+    SecurityString capStyle;
+    SecurityString capColor;
+    SecurityString glassStyle;
+    SecurityString glassColor;
+    int            isDriver;
+    int            isForeigner;
+    SecurityString passportType;
+    SecurityString immigrantTypeCode;
+    int            isSuspectedTerrorist;
+    SecurityString suspectedTerroristNumber;
+    int            isCriminalInvolved;
+    SecurityString criminalInvolvedSpecialisationCode;
+    SecurityString bodySpecialMark;
+    SecurityString crimeMethod;
+    SecurityString crimeCharacterCode;
+    SecurityString escapedCriminalNumber;
+    int            isDetainees;
+    SecurityString detentionHouseCode;
+    SecurityString detaineesIdentity;
+    SecurityString detaineesSpecialIdentity;
+    SecurityString memberTypeCode;
+    int            isVictim;
+    SecurityString victimType;
+    SecurityString injuredDegree;
+    SecurityString corpseConditionCode;
+    int            isSuspiciousPerson;
+    SecurityString attitude;
+    double         similarityDegree;
+    SecurityString eyebrowStyle;
+    SecurityString noseStyle;
+    SecurityString mustacheStyle;
+    SecurityString lipStyle;
+    SecurityString wrinklePouch;
+    SecurityString acneStain;
+    SecurityString freckleBirthmark;
+    SecurityString scarDimple;
+    SecurityString otherFeature;
+    security_subimage_info_t  subimageInfo;
 } security_face_t;
 
 typedef struct _security_motorvehicle_t {
@@ -268,26 +352,18 @@ typedef struct _security_task_control_t {
 
 } security_task_control_t;
 
-typedef struct _security_videoslice_t {
+typedef struct _security_videoslice_info_t {
 
-} security_videoslice_t;
+} security_videoslice_info_t;
+
+typedef struct _attr_condition {
+	SecurityString key;
+	SecurityString value;
+} attr_condition_t;
 
 typedef struct _security_videolabel_all_content_t {
 
 } security_videolabel_all_content_t;
-
-typedef struct _security_system_time_t {
-	std::string viidServerId;
-	std::string timeMode;
-	std::string localTime;
-	std::string timeZone;
-} security_system_time_t;
-
-
-typedef struct _attr_condition {
-    std::string key;
-    std::string value;
-} attr_condition_t;
 
 typedef SecurityArray<attr_condition_t>                     attr_conditions_t;
 typedef SecurityArray<security_image_info_t>                security_image_infos_t;
@@ -310,9 +386,29 @@ typedef SecurityArray<security_subscribe_t>                 security_subscribes_
 typedef SecurityArray<security_subscribe_notify_t>          security_subscribe_notifys_t;
 typedef SecurityArray<security_task_t>                      security_tasks_t;
 typedef SecurityArray<security_task_control_t>              security_task_controls_t;
-typedef SecurityArray<security_videoslice_t>                security_videoslices_t;
+
 typedef SecurityArray<security_videolabel_all_content_t>    security_videolabel_all_contents_t;
-typedef SecurityArray<std::string>                          security_idlist_t;
+typedef SecurityArray<SecurityString>                          security_idlist_t;
+
+typedef struct _security_videoslice_t {
+	security_videoslice_info_t  videoSliceInfo;
+    security_persons_t          personList;
+    security_faces_t            faceList;
+    security_motorvehicles_t    motorVehicleList;
+    security_nonmotorvehicles_t nonmotorVehicleList;
+    security_things_t           thingList;
+    security_scenes_t           sceneList;
+    void*                       data;
+} security_videoslice_t;
+
+typedef SecurityArray<security_videoslice_t>                security_videoslices_t;
+
+typedef struct _security_system_time_t {
+	SecurityString viidServerId;
+	SecurityString timeMode;
+	SecurityString localTime;
+	SecurityString timeZone;
+} security_system_time_t;
 
 /**
  * @Class    security_message_factory
@@ -323,44 +419,44 @@ typedef SecurityArray<std::string>                          security_idlist_t;
  */
 class security_message_factory {
 public:
-    static std::string makeRegisterMessage(const char* deviceId);
-    static std::string makeUnregisterMessage(const char* deviceId);
-    static std::string makeKeepaliveMessage(const char* deviceId);
-    static std::string makeTimeMessage(const security_system_time_t* sysTime);
-    static std::string makeAPEListMessage();
-    static std::string makeVideoSliceListMessage();
-    static std::string makeVideoSliceInfoListMessage();
-    static std::string makeImageListMessage(security_images_t& imageList);
-    static std::string makeImageObjectMessage(const security_image_t* imgObject);
-    static std::string makeImageInfoMessage(const security_image_info_t* imageInfo);
-    static std::string makeFileListMessage(security_files_t& fileList);
-    static std::string makeFileObjectMessage(const security_file_t* fileObject);
-    static std::string makeFileInfoMessage(const security_file_info_t* fileInfo);
-    static std::string makePersonListMessage(security_persons_t& personList);
-    static std::string makePersonObjectMessage(const security_person_t* personObject);
-    static std::string makeFaceListMessage(security_faces_t& faceList);
-    static std::string makeFaceMessage(const security_face_t* faceObject);
-    static std::string makeMotorVehicleListMessage(security_motorvehicles_t& motorVehicleList);
-    static std::string makeMotorVehicleMessage(const security_motorvehicle_t* motorVehicle);
-    static std::string makeNonMotorVehicleListMessage(security_nonmotorvehicles_t& nonmotorVehicleList);
-    static std::string makeNonMotorVehicleMessage(const security_nonmotorvehicle_t* nonmotorVehicle);
-    static std::string makeThingListMessage(security_things_t& thingList);
-    static std::string makeThingMessage(const security_thing_t* thingObject);
-    static std::string makeSceneListMessage(security_scenes_t& sceneList);
-    static std::string makeSceneMessage(const security_scene_t* scemeObject);
-    static std::string makeCaseListMessage(security_cases_t& caseList);
-    static std::string makeCaseMessage(const security_case_t* caseObject);
-    static std::string makeCaseInfoMessage(const security_caseinfo_t* caseInfo);
-    static std::string makeDispositionMessage(const security_disposition_t* disp);
-	static std::string makeDispositionListMessage(security_dispositions_t& dispList);
-    static std::string makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti);
-	static std::string makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList);
-    static std::string makeSubscribeListMessage(security_subscribes_t& subscribeList);
-	static std::string makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList);
-    static std::string makeAnalysisRuleListMessage(security_analysis_rules_t& analysisRuleList);
-    static std::string makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule);
-    static std::string makeVideoLabelListMessage(security_videolabels_t& videoLabelList);
-    static std::string makeVideoLabelMessage(const security_videolabel_t* videoLabel);
+    static SecurityString makeRegisterMessage(const char* deviceId);
+    static SecurityString makeUnregisterMessage(const char* deviceId);
+    static SecurityString makeKeepaliveMessage(const char* deviceId);
+    static SecurityString makeTimeMessage(const security_system_time_t* sysTime);
+    static SecurityString makeAPEListMessage();
+    static SecurityString makeVideoSliceListMessage(const security_videoslice_t* videoSlice);
+    static SecurityString makeVideoSliceInfoListMessage();
+    static SecurityString makeImageListMessage(security_images_t& imageList);
+    static SecurityString makeImageObjectMessage(const security_image_t* imgObject);
+    static SecurityString makeImageInfoMessage(const security_image_info_t* imageInfo);
+    static SecurityString makeFileListMessage(security_files_t& fileList);
+    static SecurityString makeFileObjectMessage(const security_file_t* fileObject);
+    static SecurityString makeFileInfoMessage(const security_file_info_t* fileInfo);
+    static SecurityString makePersonListMessage(security_persons_t& personList);
+    static SecurityString makePersonObjectMessage(const security_person_t* personObject);
+    static SecurityString makeFaceListMessage(security_faces_t& faceList);
+    static SecurityString makeFaceMessage(const security_face_t* faceObject);
+    static SecurityString makeMotorVehicleListMessage(security_motorvehicles_t& motorVehicleList);
+    static SecurityString makeMotorVehicleMessage(const security_motorvehicle_t* motorVehicle);
+    static SecurityString makeNonMotorVehicleListMessage(security_nonmotorvehicles_t& nonmotorVehicleList);
+    static SecurityString makeNonMotorVehicleMessage(const security_nonmotorvehicle_t* nonmotorVehicle);
+    static SecurityString makeThingListMessage(security_things_t& thingList);
+    static SecurityString makeThingMessage(const security_thing_t* thingObject);
+    static SecurityString makeSceneListMessage(security_scenes_t& sceneList);
+    static SecurityString makeSceneMessage(const security_scene_t* scemeObject);
+    static SecurityString makeCaseListMessage(security_cases_t& caseList);
+    static SecurityString makeCaseMessage(const security_case_t* caseObject);
+    static SecurityString makeCaseInfoMessage(const security_caseinfo_t* caseInfo);
+    static SecurityString makeDispositionMessage(const security_disposition_t* disp);
+	static SecurityString makeDispositionListMessage(security_dispositions_t& dispList);
+    static SecurityString makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti);
+	static SecurityString makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList);
+    static SecurityString makeSubscribeListMessage(security_subscribes_t& subscribeList);
+	static SecurityString makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList);
+    static SecurityString makeAnalysisRuleListMessage(security_analysis_rules_t& analysisRuleList);
+    static SecurityString makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule);
+    static SecurityString makeVideoLabelListMessage(security_videolabels_t& videoLabelList);
+    static SecurityString makeVideoLabelMessage(const security_videolabel_t* videoLabel);
 
 private:
     static const char* num2String(int port) {static char buff[8]={0}; sprintf(buff, "%d", port); return buff;}

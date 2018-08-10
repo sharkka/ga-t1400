@@ -35,7 +35,10 @@ int security_viid::sys_register(const char* ip, int port, const char* deviceId) 
 
     http_message hm;
     std::string sxml = security_message_factory::makeRegisterMessage(deviceId);
-    int ret = hm.post(suri.c_str(), sxml);
+	std::vector<std::string> headerList;
+	headerList.push_back("username:admin");
+	headerList.push_back("password:13579");
+    int ret = hm.post(suri.c_str(), headerList, sxml);
     std::string respData;
     respData = hm.message();
     printf("response: %s\n", respData.c_str());
@@ -51,7 +54,7 @@ int security_viid::sys_register(const char* ip, int port, const char* deviceId) 
             return -1;
         }
     }
-    printf("Register success.");
+    printf("Register success.\n");
     return 0;
 }
 /**
@@ -76,18 +79,28 @@ int security_viid::sys_unregister(const char* ip, int port, const char* deviceId
         printf("device ID invalid.\n");
         return -1;
     }
+	std::vector<std::string> headerList;
+	headerList.push_back("username:admin");
+	headerList.push_back("password:13579");
     http_message hm;
     std::string sxml = security_message_factory::makeUnregisterMessage(deviceId);
-    int ret = hm.post(suri.c_str(), sxml);
-    std::string respData;
-    respData = hm.message();
-    printf("response: %s\n", respData.c_str());
-    if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
-        printf("Unregister failed.\n");
-        return -1;
-    }
-    printf("Unregister success.");
-    return 0;
+    int ret = hm.post(suri.c_str(), headerList, sxml);
+	std::string respData;
+	printf("response: %s\n", respData.c_str());
+	if (SECURITY_REST_HTTP_RESPONSE_401 == hm.errorCode()) {
+		http_message hm;
+
+		printf("server response %d\n", ret);
+		hm.appendHeaderItem("username:admin");
+		hm.appendHeaderItem("password:13579");
+		int ret = hm.post(suri, sxml);
+		if (SECURITY_REST_HTTP_RESPONSE_200 != hm.errorCode()) {
+			printf("UnRegister failed.\n");
+			return -1;
+		}
+	}
+	printf("UnRegister success.\n");
+	return 0;
 }
 /**
  * @Method   sys_keepalive
@@ -384,18 +397,14 @@ int security_viid::query_video_slices(const char* ip, int port, const char* key,
  * @param    deviceId [description]
  * @return   [description]
  */
-int security_viid::add_video_slices(const char* ip, int port, const char* deviceId) {
+int security_viid::add_video_slices(const char* ip, int port, const security_videoslice_t* videoSlice) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
         return -1;
     }
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
-        return -1;
-    }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOSLICES);
-    std::string sxml = security_message_factory::makeVideoSliceListMessage();
+    std::string sxml = security_message_factory::makeVideoSliceListMessage(videoSlice);
     http_message hm;
     int ret = hm.post(suri.c_str(), sxml);
     std::string respData;
@@ -458,14 +467,10 @@ int security_viid::query_video_slice(const char* ip, int port, const char* id) {
  * @param    deviceId [description]
  * @return   [description]
  */
-int security_viid::update_video_slice(const char* ip, int port, const char* id, const char* deviceId) {
+int security_viid::update_video_slice(const char* ip, int port, const char* id, const security_videoslice_t* videoSlice) {
     std::string suri = addressPrefix(ip, port);
     if (suri.empty()) {
         printf("address incorrect.\n");
-        return -1;
-    }
-    if (!deviceId || strlen(deviceId) < 1) {
-        printf("device ID invalid.\n");
         return -1;
     }
     if (!id || strlen(id) < 1) {
@@ -474,7 +479,7 @@ int security_viid::update_video_slice(const char* ip, int port, const char* id, 
     }
     suri.append(SECURITY_URL_PATH_VIID_VIDEOSLICESS);
     suri.append(id);
-    std::string sxml = security_message_factory::makeVideoSliceListMessage();
+    std::string sxml = security_message_factory::makeVideoSliceListMessage(videoSlice);
     http_message hm;
     int ret = hm.put(suri.c_str(), sxml);
     std::string respData;
