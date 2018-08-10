@@ -553,30 +553,86 @@ typedef struct _security_case_t {
     int            state;
 } security_case_t;
 typedef SecurityArray<security_case_t>                      security_cases_t;
+/**
+ * @Struct   security_caseinfo_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_caseinfo_t {
-
+    
 } security_caseinfo_t;
-
+/**
+ * @Struct   security_device_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_device_t {
-
+    
 } security_device_t;
 typedef SecurityArray<security_device_t> security_devices_t;
+/**
+ * @Struct   security_device_status_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_device_status_t {
-
+    
 } security_device_status_t;
 typedef SecurityArray<security_device_status_t> security_device_statuss_t;
+/**
+ * @Struct   security_lane_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_lane_t {
-
+    int            id;
+    SecurityString tollgateId;
+    int            laneNo;
+    SecurityString name;
+    SecurityString direction;
+    SecurityString desc;
+    int            maxSpeed;
+    int            cityPass;
+    SecurityString apeId;
 } security_lane_t;
 typedef SecurityArray<security_lane_t> security_lanes_t;
+/**
+ * @Struct   security_tollgate_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_tollgate_t {
-
+    
 } security_tollgate_t;
 typedef SecurityArray<security_tollgate_t> security_tollgates_t;
+/**
+ * @Struct   security_aps_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_aps_t {
-
+    
 } security_aps_t;
 typedef SecurityArray<security_aps_t> security_apss_t;
+/**
+ * @Struct   security_aps_status_t
+ * @Brief
+ * @DateTime 2018/8/10 14:07:00
+ * @Modify   2018/8/10 14:07:05
+ * @Author   Anyz
+ */
 typedef struct _security_aps_status_t {
 
 } security_aps_status_t;
@@ -782,6 +838,19 @@ typedef struct _security_subscribe_notify_t {
     security_scenes_t           sceneList;
 } security_subscribe_notify_t;
 
+typedef struct _security_viidserver_t {
+    SecurityString id;
+    SecurityString serverName;
+    SecurityString ipAddr;
+    SecurityString ipv6Addr;
+    int            port;
+    SecurityString upServerId;
+    SecurityString subServerId;
+    bool           isOnline;
+    SecurityString lastOnlineTime;
+} security_viidserver_t;
+typedef SecurityArray<security_viidserver_t> security_viidservers_t;
+
 typedef struct _security_task_t {
 
 } security_task_t;
@@ -795,8 +864,8 @@ typedef struct _security_videoslice_info_t {
 } security_videoslice_info_t;
 
 typedef struct _attr_condition {
-	SecurityString key;
-	SecurityString value;
+    SecurityString key;
+    SecurityString value;
 } attr_condition_t;
 /**
  * @Struct   security_videolabel_all_content_t
@@ -834,7 +903,7 @@ typedef SecurityArray<SecurityString>                       security_idlist_t;
  * @Author   Anyz
  */
 typedef struct _security_videoslice_t {
-	security_videoslice_info_t  videoSliceInfo;
+    security_videoslice_info_t  videoSliceInfo;
     security_persons_t          personList;
     security_faces_t            faceList;
     security_motorvehicles_t    motorVehicleList;
@@ -853,11 +922,33 @@ typedef SecurityArray<security_videoslice_t>                security_videoslices
  * @Author   Anyz
  */
 typedef struct _security_system_time_t {
-	SecurityString viidServerId;
-	SecurityString timeMode;
-	SecurityString localTime;
-	SecurityString timeZone;
+    SecurityString viidServerId;
+    SecurityString timeMode;
+    SecurityString localTime;
+    SecurityString timeZone;
 } security_system_time_t;
+
+typedef struct _security_system_status_t {
+    SecurityString viidServerId;
+    bool           isOnline;
+    SecurityString currentTime;
+} security_system_status_t;
+
+typedef struct _security_time_server_t {
+    int            ntpServerId;
+    SecurityString serverName;
+    SecurityString ipAddr;
+    SecurityString ipv6Addr;
+    int            port;
+} security_time_server_t;
+
+typedef struct _security_response_status_t {
+	int            statusCode;
+    SecurityString statusString;
+    SecurityString id;
+    SecurityString localTime;
+} security_response_status_t;
+typedef SecurityArray<security_response_status_t> security_response_statuss_t;
 
 /**
  * @Class    security_message_factory
@@ -897,11 +988,11 @@ public:
     static SecurityString makeCaseMessage(const security_case_t* caseObject);
     static SecurityString makeCaseInfoMessage(const security_caseinfo_t* caseInfo);
     static SecurityString makeDispositionMessage(const security_disposition_t* disp);
-	static SecurityString makeDispositionListMessage(security_dispositions_t& dispList);
+    static SecurityString makeDispositionListMessage(security_dispositions_t& dispList);
     static SecurityString makeDispositionNotifyMessage(const security_disposition_notify_t* dispNoti);
-	static SecurityString makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList);
+    static SecurityString makeDispositionNotifyListMessage(security_disposition_notifys_t& dispNotifyList);
     static SecurityString makeSubscribeListMessage(security_subscribes_t& subscribeList);
-	static SecurityString makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList);
+    static SecurityString makeSubscribeNotifyListMessage(security_subscribe_notifys_t& subscribeNotifyList);
     static SecurityString makeAnalysisRuleListMessage(security_analysis_rules_t& analysisRuleList);
     static SecurityString makeAnalysisRuleMessage(const security_analysis_rule_t* analysisRule);
     static SecurityString makeVideoLabelListMessage(security_videolabels_t& videoLabelList);
