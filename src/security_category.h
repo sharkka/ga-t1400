@@ -317,6 +317,48 @@ enum class SecurityResponseStatus {
     Reboot = 9
 };
 
+enum class SecurityColorType {
+    Block   = 1,
+    White   = 2,
+    Gray    = 3,
+    Red     = 4,
+    Blue    = 5,
+    Yellow  = 6,
+    Orange  = 7,
+    Brown   = 8,
+    Green   = 9,
+    Purple  = 10,
+    Cyan    = 11,
+    Pink    = 12,
+    Clarity = 13,
+    Other   = 99,
+};
+
+enum class SecuritySecretLevel {
+    TOP      = 1,
+    Most     = 2,
+    Very     = 3,
+    Secret   = 4,
+    Internal = 5,
+    Public   = 6,
+    Other    = 7
+};
+
+enum class SecurityQualityGrade {
+    Awful   = 1,
+    Bad     = 2,
+    Common  = 3,
+    good    = 4,
+    perfect = 5
+};
+
+#define SECURITY_TOLLGATE_TYPE_NATION    "10"
+#define SECURITY_TOLLGATE_TYPE_NATIVE    "20"
+#define SECURITY_TOLLGATE_TYPE_CITY      "30"
+#define SECURITY_TOLLGATE_TYPE_INCITY    "31"
+#define SECURITY_TOLLGATE_TYPE_COUNTY    "40"
+#define SECURITY_TOLLGATE_TYPE_INCOUNTY  "41"
+#define SECURITY_TOLLGATE_TYPE_OTHERS    "99"
 
 
 //=========================================================================================================================//
