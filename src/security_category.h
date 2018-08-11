@@ -7,52 +7,106 @@
 #ifndef __SECURITY_CATEGORY_H_
 #define __SECURITY_CATEGORY_H_
 
-// type
+/**
+ * @Enum     SecurityCaptureDirection
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityCaptureDirection {
     Front = 0,
     Tail  = 1
 };
-
+/**
+ * @Enum     SecurityTollgateStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTollgateStatus {
     Working = 1,
     Stop    = 2,
     Other   = 9
 };
-
+/**
+ * @Enum     SecurityTollgatePurpose
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTollgatePurpose {
     Security = 80,
     Traffic  = 81,
     Other    = 82
 };
-
+/**
+ * @Enum     SecurityLaneCityPass
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityLaneCityPass {
     Enter = 1,
     Away  = 2,
     None  = 3,
     Mix   = 4
 };
-
+/**
+ * @Enum     SecurityVideoSliceAudioFlag
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVideoSliceAudioFlag {
     WithoutAudio = 0,
     WithAudio    = 1
 };
-
+/**
+ * @Enum     SecurityVideoSliceProcFlag
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVideoSliceProcFlag {
     NoProcess = 0,
     Processed = 1
 };
-
+/**
+ * @Enum     SecurityImageProcFlag
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityImageProcFlag {
     NoProcess = 0,
     Processed = 1
 };
-
+/**
+ * @Enum     SecurityCommonStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityCommonStatus {
     No     = 0,
     Yes    = 1,
     Unknow = 2
 };
-
+/**
+ * @Enum     SecurityFaceAttitude
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceAttitude {
     Normal          = 1,
     LittleUp        = 2,
@@ -64,7 +118,13 @@ enum class SecurityFaceAttitude {
     RightSide       = 8,
     RightFull       = 9
 };
-
+/**
+ * @Enum     SecurityFaceEyebrowStyle
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceEyebrowStyle {
     Style1 = 1,
     Style2 = 2,
@@ -76,7 +136,13 @@ enum class SecurityFaceEyebrowStyle {
     Style8 = 8,
     Style9 = 9
 };
-
+/**
+ * @Enum     SecurityFaceNoseStyle
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceNoseStyle {
     Style1 = 1,
     Style2 = 2,
@@ -89,7 +155,13 @@ enum class SecurityFaceNoseStyle {
     Style9 = 9,
     Style10 = 10
 };
-
+/**
+ * @Enum     SecurityFaceMustacheStyle
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceMustacheStyle {
     Style1 = 1,
     Style2 = 2,
@@ -99,7 +171,13 @@ enum class SecurityFaceMustacheStyle {
     Style6 = 6,
     Style7 = 7
 };
-
+/**
+ * @Enum     SecurityLipStyle
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityLipStyle {
     Style1 = 1,
     Style2 = 2,
@@ -112,7 +190,13 @@ enum class SecurityLipStyle {
     Style9 = 9,
     Style10 = 10
 };
-
+/**
+ * @Enum     SecurityFaceWrinklePouch
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceWrinklePouch {
     Style1 = 1,
     Style2 = 2,
@@ -127,7 +211,13 @@ enum class SecurityFaceWrinklePouch {
     Style11 = 11,
     Style12 = 12
 };
-
+/**
+ * @Enum     SecurityFaceAcneStain
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceAcneStain {
     Style1 = 1,
     Style2 = 2,
@@ -137,7 +227,13 @@ enum class SecurityFaceAcneStain {
     Style6 = 6,
     Style7 = 7
 };
-
+/**
+ * @Enum     SecurityFaceFreckleBirthmark
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceFreckleBirthmark {
     Style1 = 1,
     Style2 = 2,
@@ -147,13 +243,25 @@ enum class SecurityFaceFreckleBirthmark {
     Style6 = 6,
     Style7 = 7
 };
-
+/**
+ * @Enum     SecurityFaceScarDimple
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceScarDimple {
     Style1 = 1,
     Style2 = 2,
     Style3 = 3
 };
-
+/**
+ * @Enum     SecurityFaceOtherFeature
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityFaceOtherFeature {
     Style1 = 1,
     Style2 = 2,
@@ -167,7 +275,13 @@ enum class SecurityFaceOtherFeature {
     Style10 = 10,
     Style11 = 11
 };
-
+/**
+ * @Enum     SecurityVehiclePlateColor
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVehiclePlateColor {
     Black  = 0,
     White  = 1,
@@ -175,25 +289,49 @@ enum class SecurityVehiclePlateColor {
     Blue   = 3,
     Green  = 4
 };
-
+/**
+ * @Enum     SecurityVehicleSunvisor
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVehicleSunvisor {
     No = 0,
     Yes = 1
 };
-
+/**
+ * @Enum     SecurityVehicleSafetyBelt
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVehicleSafetyBelt {
     No = 0,
     Yes = 1
 };
 
 typedef SecurityCommonStatus SecurityVehicleModified;
-
+/**
+ * @Enum     SecurityVehicleFilmColor
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVehicleFilmColor {
     dark  = 0,
     light = 1,
     none  = 2
 };
-
+/**
+ * @Enum     SecurityCaseStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityCaseStatus {
     NewCase                 = 0,
     Checkin                 = 1,
@@ -207,27 +345,51 @@ enum class SecurityCaseStatus {
     ComposedAndArchived     = 9,
     CanceledAndArchived     = 10
 };
-
+/**
+ * @Enum     SecurityVideoSliceTargetStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityVideoSliceTargetStatus {
     First = 0,
     Always = 1,
     Disappear = 2
 };
-
+/**
+ * @Enum     SecurityEventLevel
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityEventLevel {
     Notice    = 0,
     Warn      = 1,
     FatalWarn = 2,
     Other
 };
-
+/**
+ * @Enum     SecurityTargetDensity
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTargetDensity {
     VerySparse = 0,
     Sparse     = 1,
     Dense      = 2,
     VeryDense  = 3
 };
-
+/**
+ * @Enum     SecurityTriggerDirection
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTriggerDirection {
     LeftToRight = 0,
     RightToLeft = 1,
@@ -236,7 +398,13 @@ enum class SecurityTriggerDirection {
     Any         = 4,
     NoOrder
 };
-
+/**
+ * @Enum     SecurityActionType
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityActionType {
     EnterArea       = 0,
     LeaveArea       = 1,
@@ -245,7 +413,13 @@ enum class SecurityActionType {
     InArea          = 4,
     Other
 };
-
+/**
+ * @Enum     SecurityTargetType
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTargetType {
     Person          = 1,
     Face            = 2,
@@ -254,56 +428,110 @@ enum class SecurityTargetType {
     Thing           = 5,
     Scene           = 6
 };
-
+/**
+ * @Enum     SecurityDensityUnit
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityDensityUnit {
     Rank = 0,
     Percent = 1,
     Count = 2,
     Other
 };
-
+/**
+ * @Enum     SecurityTargetFeature
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityTargetFeature {
     KeyValuePair        = 1,
     KeyFromPropertyType = 2,
     Fuzzy               = 3,
     Expression          = 4
 };
-
+/**
+ * @Enum     SecurityDispositionPriorityLevel
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityDispositionPriorityLevel {
     Level1 = 1,
     Level2 = 2,
     Level3 = 3
 };
-
+/**
+ * @Enum     SecurityDispositionOperateType
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityDispositionOperateType {
     Disposition   = 0,
     UnDisposition = 1
 };
-
+/**
+ * @Enum     SecurityDispositionStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityDispositionStatus {
     Doing   = 0,
     Cancel  = 1,
     Expired = 2,
     None    = 9
 };
-
+/**
+ * @Enum     SecurityDispositionRange
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityDispositionRange {
     Tollgate = 1,
     Area     = 2
 };
-
+/**
+ * @Enum     SecuritySubscribeOperateType
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecuritySubscribeOperateType {
     Subscribe = 0,
     Cancel = 1
 };
-
+/**
+ * @Enum     SecuritySubscribeStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecuritySubscribeStatus {
     Doing = 0,
     Canceled = 1,
     Expired = 2,
     None = 9
 };
-
+/**
+ * @Enum     SecurityResponseStatus
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityResponseStatus {
     Success = 0,
     OtherError = 1,
@@ -316,7 +544,13 @@ enum class SecurityResponseStatus {
     InvalidJsonContent = 8,
     Reboot = 9
 };
-
+/**
+ * @Enum     SecurityColorType
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityColorType {
     Block   = 1,
     White   = 2,
@@ -333,7 +567,13 @@ enum class SecurityColorType {
     Clarity = 13,
     Other   = 99,
 };
-
+/**
+ * @Enum     SecuritySecretLevel
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecuritySecretLevel {
     TOP      = 1,
     Most     = 2,
@@ -343,7 +583,13 @@ enum class SecuritySecretLevel {
     Public   = 6,
     Other    = 7
 };
-
+/**
+ * @Enum     SecurityQualityGrade
+ * @Brief
+ * @DateTime 2018-08-11T10:38:04+0800
+ * @Modify   2018-08-11T10:38:04+0800
+ * @Author   Anyz
+ */
 enum class SecurityQualityGrade {
     Awful   = 1,
     Bad     = 2,
